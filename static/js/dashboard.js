@@ -1,5 +1,6 @@
 let trafficChart;
 let currentMode = "MANUAL";
+let selectedDeviceIp = null;
 
 async function updateDashboard() {
     try {
@@ -35,6 +36,10 @@ async function updateDashboard() {
         renderUserCards(data.users, data.predictions);
         updateChart(data.history);
         renderTopology(data.topology);
+
+        if (selectedDeviceIp && data.users.some(user => user.ip === selectedDeviceIp)) {
+            viewDeviceDetails(selectedDeviceIp, true);
+        }
 
     } catch (err) {
         console.error("Dashboard update failed:", err);
@@ -109,6 +114,56 @@ async function checkManualIP() {
     }
 }
 
+async function addManualUserIP() {
+    const ipInput = document.getElementById('manual-user-ip');
+    const nameInput = document.getElementById('manual-user-name');
+    const roleInput = document.getElementById('manual-user-role');
+
+    if (!ipInput || !nameInput || !roleInput) return;
+
+    const ip = ipInput.value.trim();
+    const name = nameInput.value.trim();
+    const role = roleInput.value;
+
+    if (!ip) {
+        showToast('Please enter user IP');
+        return;
+    }
+
+    const response = await fetch('/api/manual_user_ip', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ip, name, role })
+    });
+
+    const data = await response.json();
+    if (data.status === 'success') {
+        const reachText = data.reachable ? 'reachable' : 'not reachable';
+        showToast(`Saved user IP ${ip} (${reachText})`);
+        ipInput.value = '';
+        nameInput.value = '';
+        updateDashboard();
+    } else {
+        showToast(data.message || 'Failed to add user IP');
+    }
+}
+
+async function cleanupUnnecessaryIPs() {
+    const response = await fetch('/api/cleanup_devices', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+    });
+
+    const data = await response.json();
+    if (data.status === 'success') {
+        showToast(`Cleanup complete: removed ${data.removed} unnecessary IP(s)`);
+        updateDashboard();
+    } else {
+        showToast(data.message || 'Cleanup failed');
+    }
+}
+
 function initManualIpInput() {
     const ipInput = document.getElementById('manual-ip');
     if (!ipInput) return;
@@ -119,6 +174,27 @@ function initManualIpInput() {
             checkManualIP();
         }
     });
+}
+
+function initManualUserInput() {
+    const ipInput = document.getElementById('manual-user-ip');
+    const nameInput = document.getElementById('manual-user-name');
+    if (ipInput) {
+        ipInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                addManualUserIP();
+            }
+        });
+    }
+    if (nameInput) {
+        nameInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                addManualUserIP();
+            }
+        });
+    }
 }
 
 async function toggleBlock(ip, currentStatus) {
@@ -172,6 +248,10 @@ function renderUserCards(users, predictions = {}) {
 
         const card = document.createElement('div');
         card.className = `card ${isBlocked ? 'blocked-card' : ''}`;
+        if (selectedDeviceIp === user.ip) {
+            card.style.borderColor = '#6366f1';
+            card.style.boxShadow = '0 0 0 1px rgba(99,102,241,0.35)';
+        }
         card.innerHTML = `
             <div class="user-card-header">
                 <div>
@@ -215,20 +295,29 @@ function renderUserCards(users, predictions = {}) {
                 </div>
             </div>
         `;
+
+        card.addEventListener('click', () => viewDeviceDetails(user.ip));
         grid.appendChild(card);
     });
 }
 
-async function viewDeviceDetails(ip) {
+async function viewDeviceDetails(ip, silent = false) {
     const panel = document.getElementById('device-details-content');
     if (!panel) return;
 
-    panel.innerHTML = `Loading device details for ${ip}...`;
+    selectedDeviceIp = ip;
+
+    if (!silent) {
+        panel.innerHTML = `Loading device details for ${ip}...`;
+    }
     try {
         const response = await fetch(`/api/device/${encodeURIComponent(ip)}/details`);
         const data = await response.json();
         if (data.status !== 'success') {
             panel.innerHTML = data.message || 'Failed to fetch device details';
+            if (!silent) {
+                showToast(data.message || 'Failed to fetch device details');
+            }
             return;
         }
 
@@ -260,6 +349,9 @@ async function viewDeviceDetails(ip) {
         `;
     } catch (error) {
         panel.innerHTML = 'Failed to fetch device details';
+        if (!silent) {
+            showToast('Failed to fetch device details');
+        }
     }
 }
 
@@ -267,12 +359,16 @@ function renderTopology(topology) {
     const panel = document.getElementById('topology-content');
     if (!panel || !topology) return;
 
+    const typeCounts = topology.device_type_counts || {};
+
     panel.innerHTML = `
         <div style="margin-bottom: 0.6rem;">
             <span class="badge badge-student">${topology.topology || 'Unknown'}</span>
             <span style="margin-left: 8px; color: var(--text-muted);">${topology.summary || ''}</span>
         </div>
-        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.7rem;">Nodes: ${(topology.nodes || []).length} • Links: ${(topology.links || []).length} • Subnets: ${topology.subnet_count || 0}</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.45rem;">Likely layout: ${topology.likely_layout || 'N/A'}</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.45rem;">Nodes: ${(topology.nodes || []).length} • Links: ${(topology.links || []).length} • Subnets: ${topology.subnet_count || 0}</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.7rem;">This PC: ${typeCounts['This PC'] || 0} • PC: ${typeCounts['PC'] || 0} • Laptop: ${typeCounts['Laptop'] || 0} • Mobile: ${typeCounts['Mobile'] || 0} • Unknown: ${typeCounts['Unknown'] || 0}</div>
         <div style="display: flex; flex-wrap: wrap; gap: 8px;">
             ${(topology.nodes || []).map(node => `<span class="badge badge-guest">${node.label}</span>`).join('')}
         </div>
@@ -352,5 +448,6 @@ function showToast(msg) {
 
 initChart();
 initManualIpInput();
+initManualUserInput();
 setInterval(updateDashboard, 1000);
 updateDashboard();

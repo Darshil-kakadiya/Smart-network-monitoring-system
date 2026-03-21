@@ -81,6 +81,20 @@ def _infer_topology(devices):
         topology_name = "Tree/Hybrid"
         summary = "Multiple subnet segments detected"
 
+    type_counts = {
+        "This PC": 0,
+        "PC": 0,
+        "Laptop": 0,
+        "Mobile": 0,
+        "Unknown": 0
+    }
+    for device in active_devices:
+        device_type = device.get('device_type', 'Unknown')
+        if device_type not in type_counts:
+            type_counts["Unknown"] += 1
+        else:
+            type_counts[device_type] += 1
+
     nodes = [{"id": "router", "label": "Router/Gateway", "type": "Core"}]
     links = []
     for device in active_devices:
@@ -94,7 +108,9 @@ def _infer_topology(devices):
     return {
         "topology": topology_name,
         "summary": summary,
+        "likely_layout": "Router/Switch -> End devices" if topology_name == "Star" else "Core -> Segment switches -> End devices",
         "subnet_count": len(subnet_groups),
+        "device_type_counts": type_counts,
         "nodes": nodes,
         "links": links
     }
@@ -240,6 +256,46 @@ def manual_ip_scan():
         "device": result.get('device'),
         "devices": users_db
     })
+
+
+@app.route('/api/manual_user_ip', methods=['POST'])
+def manual_user_ip_add():
+    if not is_authenticated():
+        return jsonify({"status": "error", "message": "Unauthorized"}), 401
+
+    global users_db
+    data = request.get_json(silent=True) or {}
+    manual_ip = (data.get('ip') or '').strip()
+    user_name = (data.get('name') or '').strip()
+    user_role = (data.get('role') or 'Guest').strip()
+
+    result = scanner.add_or_update_manual_user(manual_ip, name=user_name, role=user_role)
+    if result.get('status') != 'success':
+        return jsonify(result), 400
+
+    users_db = scanner.devices
+    _sync_history_keys(users_db)
+    log_action("MANUAL_USER_IP", f"IP={manual_ip} name={user_name or 'auto'} role={user_role}")
+    return jsonify({
+        "status": "success",
+        "message": result.get('message'),
+        "reachable": result.get('reachable'),
+        "device": result.get('device'),
+        "devices": users_db
+    })
+
+
+@app.route('/api/cleanup_devices', methods=['POST'])
+def cleanup_devices():
+    if not is_authenticated():
+        return jsonify({"status": "error", "message": "Unauthorized"}), 401
+
+    global users_db
+    result = scanner.cleanup_unnecessary_devices()
+    users_db = scanner.devices
+    _sync_history_keys(users_db)
+    log_action("DEVICE_CLEANUP", f"Removed unnecessary IPs: {result.get('removed', 0)}")
+    return jsonify({"status": "success", **result, "devices": users_db})
 
 
 @app.route('/api/device/<ip>/details', methods=['GET'])

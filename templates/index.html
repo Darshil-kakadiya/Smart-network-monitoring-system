@@ -34,6 +34,18 @@
                         <input id="manual-ip" type="text" autocomplete="off" placeholder="Enter IP (e.g. 192.168.1.20)" title="Type an IPv4/IPv6 address and press Enter or CHECK IP" style="padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-main); min-width: 220px;">
                         <button onclick="checkManualIP()" class="prio-btn">CHECK IP</button>
                     </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input id="manual-user-ip" type="text" autocomplete="off" placeholder="User IP" style="padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-main); width: 120px;">
+                        <input id="manual-user-name" type="text" autocomplete="off" placeholder="User Name" style="padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-main); width: 140px;">
+                        <select id="manual-user-role" style="padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-main);">
+                            <option>Guest</option>
+                            <option>Student</option>
+                            <option>Teacher</option>
+                            <option>Admin</option>
+                        </select>
+                        <button onclick="addManualUserIP()" class="prio-btn">ADD USER IP</button>
+                    </div>
+                    <button onclick="cleanupUnnecessaryIPs()" class="prio-btn" style="background: rgba(239, 68, 68, 0.1); border-color: #ef4444;">🧹 CLEAN IPs</button>
                     <button onclick="generateReport()" class="prio-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--primary);">📊 REPORT</button>
                     <div id="global-stats" style="text-align: right;">
                         <p style="font-size: 1.2rem; font-weight: 700;" id="total-usage">0.00 Mbps</p>

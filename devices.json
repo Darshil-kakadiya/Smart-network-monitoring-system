@@ -33,83 +33,95 @@
         "mac": "FF:FF:FF:FF:FF:FF",
         "name": "Unknown Device",
         "role": "Guest",
-        "bandwidth_limit": 5
+        "bandwidth_limit": 5,
+        "status": "ACTIVE"
     },
     {
         "ip": "224.0.0.22",
         "mac": "01:00:5E:00:00:16",
         "name": "Unknown Device",
         "role": "Guest",
-        "bandwidth_limit": 5
+        "bandwidth_limit": 5,
+        "status": "BLOCKED"
     },
     {
         "ip": "224.0.0.251",
         "mac": "01:00:5E:00:00:FB",
         "name": "Unknown Device",
         "role": "Guest",
-        "bandwidth_limit": 5
+        "bandwidth_limit": 5,
+        "status": "BLOCKED"
     },
     {
         "ip": "224.0.0.252",
         "mac": "01:00:5E:00:00:FC",
         "name": "Unknown Device",
         "role": "Guest",
-        "bandwidth_limit": 5
+        "bandwidth_limit": 5,
+        "status": "BLOCKED"
     },
     {
         "ip": "239.255.255.250",
         "mac": "01:00:5E:7F:FF:FA",
         "name": "Unknown Device",
         "role": "Guest",
-        "bandwidth_limit": 5
+        "bandwidth_limit": 5,
+        "status": "BLOCKED"
     },
     {
         "ip": "10.255.84.83",
         "mac": "FE:E8:3B:9F:D3:7B",
         "name": "Unknown Device",
         "role": "Guest",
-        "bandwidth_limit": 5
+        "bandwidth_limit": 5,
+        "status": "BLOCKED"
     },
     {
         "ip": "10.255.84.255",
         "mac": "FF:FF:FF:FF:FF:FF",
         "name": "Unknown Device",
         "role": "Guest",
-        "bandwidth_limit": 5
+        "bandwidth_limit": 5,
+        "status": "BLOCKED"
     },
     {
         "ip": "224.0.0.22",
         "mac": "01:00:5E:00:00:16",
         "name": "Unknown Device",
         "role": "Guest",
-        "bandwidth_limit": 5
+        "bandwidth_limit": 5,
+        "status": "BLOCKED"
     },
     {
         "ip": "224.0.0.251",
         "mac": "01:00:5E:00:00:FB",
         "name": "Unknown Device",
         "role": "Guest",
-        "bandwidth_limit": 5
+        "bandwidth_limit": 5,
+        "status": "BLOCKED"
     },
     {
         "ip": "224.0.0.252",
         "mac": "01:00:5E:00:00:FC",
         "name": "Unknown Device",
         "role": "Guest",
-        "bandwidth_limit": 5
+        "bandwidth_limit": 5,
+        "status": "BLOCKED"
     },
     {
         "ip": "239.255.255.250",
         "mac": "01:00:5E:7F:FF:FA",
         "name": "Unknown Device",
         "role": "Guest",
-        "bandwidth_limit": 5
+        "bandwidth_limit": 5,
+        "status": "BLOCKED"
     },
     {
         "ip": "255.255.255.255",
         "mac": "FF:FF:FF:FF:FF:FF",
         "name": "Unknown Device",
         "role": "Guest",
-        "bandwidth_limit": 5
+        "bandwidth_limit": 5,
+        "status": "BLOCKED"
     }
 ]
