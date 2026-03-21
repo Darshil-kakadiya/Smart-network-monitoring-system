@@ -1,0 +1,115 @@
+[
+    {
+        "ip": "192.168.1.10",
+        "mac": "AA:BB:CC:DD:EE:01",
+        "name": "Admin-PC",
+        "role": "Admin",
+        "bandwidth_limit": 100
+    },
+    {
+        "ip": "192.168.1.15",
+        "mac": "AA:BB:CC:DD:EE:02",
+        "name": "Teacher-Laptop",
+        "role": "Teacher",
+        "bandwidth_limit": 50,
+        "status": "ACTIVE"
+    },
+    {
+        "ip": "192.168.1.22",
+        "mac": "AA:BB:CC:DD:EE:03",
+        "name": "Student-Phone",
+        "role": "Student",
+        "bandwidth_limit": 10
+    },
+    {
+        "ip": "192.168.1.50",
+        "mac": "AA:BB:CC:DD:EE:04",
+        "name": "Guest-Device",
+        "role": "Guest",
+        "bandwidth_limit": 5
+    },
+    {
+        "ip": "192.168.56.255",
+        "mac": "FF:FF:FF:FF:FF:FF",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5
+    },
+    {
+        "ip": "224.0.0.22",
+        "mac": "01:00:5E:00:00:16",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5
+    },
+    {
+        "ip": "224.0.0.251",
+        "mac": "01:00:5E:00:00:FB",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5
+    },
+    {
+        "ip": "224.0.0.252",
+        "mac": "01:00:5E:00:00:FC",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5
+    },
+    {
+        "ip": "239.255.255.250",
+        "mac": "01:00:5E:7F:FF:FA",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5
+    },
+    {
+        "ip": "10.255.84.83",
+        "mac": "FE:E8:3B:9F:D3:7B",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5
+    },
+    {
+        "ip": "10.255.84.255",
+        "mac": "FF:FF:FF:FF:FF:FF",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5
+    },
+    {
+        "ip": "224.0.0.22",
+        "mac": "01:00:5E:00:00:16",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5
+    },
+    {
+        "ip": "224.0.0.251",
+        "mac": "01:00:5E:00:00:FB",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5
+    },
+    {
+        "ip": "224.0.0.252",
+        "mac": "01:00:5E:00:00:FC",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5
+    },
+    {
+        "ip": "239.255.255.250",
+        "mac": "01:00:5E:7F:FF:FA",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5
+    },
+    {
+        "ip": "255.255.255.255",
+        "mac": "FF:FF:FF:FF:FF:FF",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5
+    }
+]

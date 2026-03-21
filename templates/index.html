@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Bandwidth Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                <div>
+                    <h1>SmartNet <span style="font-weight: 300; font-size: 1.2rem; color: #6366f1;">AI-POWERED</span></h1>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        <span class="live-indicator"></span> Real-time Network Intelligence
+                    </p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1.5rem;">
+                    <div id="health-score-container" style="text-align: center; border-right: 1px solid var(--border); padding-right: 1.5rem;">
+                        <p style="font-size: 1.2rem; font-weight: 800; color: #10b981;" id="health-score">100</p>
+                        <p style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Health Score</p>
+                    </div>
+                    <div id="mode-controls" class="mode-toggle-group">
+                        <button onclick="setMode('MANUAL')" id="btn-manual" class="mode-btn active">MANUAL</button>
+                        <button onclick="setMode('AUTO')" id="btn-auto" class="mode-btn">AUTO-SCAN</button>
+                    </div>
+                    <button onclick="scanNetwork()" class="prio-btn" style="background: rgba(16, 185, 129, 0.12); border-color: #10b981;">🔎 SCAN NOW</button>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input id="manual-ip" type="text" autocomplete="off" placeholder="Enter IP (e.g. 192.168.1.20)" title="Type an IPv4/IPv6 address and press Enter or CHECK IP" style="padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-main); min-width: 220px;">
+                        <button onclick="checkManualIP()" class="prio-btn">CHECK IP</button>
+                    </div>
+                    <button onclick="generateReport()" class="prio-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--primary);">📊 REPORT</button>
+                    <div id="global-stats" style="text-align: right;">
+                        <p style="font-size: 1.2rem; font-weight: 700;" id="total-usage">0.00 Mbps</p>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Current Network Load</p>
+                    </div>
+                    <a href="/logout" class="logout-btn">Logout</a>
+                </div>
+            </div>
+        </header>
+
+        <div id="alert-container" class="alert-system-panel">
+            <div class="alert-header">
+                <span class="pulse-red"></span> SYSTEM ALERTS
+            </div>
+            <div id="alert-list">
+                <!-- Alerts will appear here -->
+                <div class="alert-item info">System monitoring active on {{ os_type }}</div>
+            </div>
+        </div>
+
+        <div class="status-grid" id="user-grid">
+            <!-- User cards will be injected here -->
+        </div>
+
+        <div class="chart-container" id="device-details-panel" style="margin-top: 0;">
+            <h2 style="margin-bottom: 1rem; font-size: 1.1rem;">Selected Device Network Division</h2>
+            <div id="device-details-content" style="color: var(--text-muted);">Click any device card to view detailed network division.</div>
+        </div>
+
+        <div class="chart-container">
+            <h2 style="margin-bottom: 1rem; font-size: 1.1rem;">Detected Network Topology</h2>
+            <div id="topology-content" style="color: var(--text-muted);">Topology data is loading...</div>
+        </div>
+
+        <div class="chart-container">
+            <h2 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Detailed Traffic Analysis</h2>
+            <canvas id="trafficChart" height="100"></canvas>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

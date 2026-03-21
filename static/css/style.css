@@ -1,0 +1,309 @@
+:root {
+    --primary: #5865F2;
+    --secondary: #ed4245;
+    --bg-dark: #0a0b10;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.1);
+    --text-main: #ffffff;
+    --text-muted: #8e9297;
+    --accent-glow: 0 0 20px rgba(88, 101, 242, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 0%, #888 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.05em;
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--accent-glow);
+    transform: translateY(-5px);
+}
+
+.user-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.ip-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.usage-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.usage-unit {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.progress-bar-bg {
+    background: rgba(255, 255, 255, 0.05);
+    height: 8px;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+}
+
+.progress-bar-fill {
+    background: linear-gradient(90deg, var(--primary), #a5b4fc);
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+}
+
+.prio-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.prio-btn:hover {
+    background: var(--primary);
+}
+
+.prio-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.chart-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-admin {
+    background: #ed424522;
+    color: #ed4245;
+    border: 1px solid #ed424544;
+}
+
+.badge-teacher {
+    background: #faa61a22;
+    color: #faa61a;
+    border: 1px solid #faa61a44;
+}
+
+.badge-student {
+    background: #5865f222;
+    color: #5865f2;
+    border: 1px solid #5865f244;
+}
+
+.badge-guest {
+    background: #3ba55c22;
+    color: #3ba55c;
+    border: 1px solid #3ba55c44;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.live-indicator {
+    width: 8px;
+    height: 8px;
+    background: #43b581;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+}
+
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--secondary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(237, 66, 69, 0.4);
+    z-index: 1000;
+    transform: translateY(100px);
+    transition: transform 0.3s ease;
+    font-weight: 600;
+}
+
+.toast.show {
+    transform: translateY(0);
+}
+
+.logout-btn {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #ef4444;
+    color: white;
+}
+/* Industry Upgrade Styles */
+.mode-toggle-group {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px;
+    border-radius: 12px;
+    display: flex;
+    gap: 4px;
+    border: 1px solid var(--border);
+}
+
+.mode-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mode-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.alert-system-panel {
+    background: rgba(239, 68, 68, 0.05);
+    border: 1px solid rgba(239, 68, 68, 0.1);
+    border-radius: 16px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.alert-header {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #ef4444;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.alert-item {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    margin-bottom: 4px;
+}
+
+.alert-item.info { border-left: 3px solid var(--primary); }
+.alert-item.warn { border-left: 3px solid #f59e0b; }
+.alert-item.error { border-left: 3px solid #ef4444; }
+
+.pulse-red {
+    width: 8px;
+    height: 8px;
+    background: #ef4444;
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+}
+
+
+.blocked-card {
+    opacity: 0.7;
+    border-color: #ef4444 !important;
+    background: rgba(239, 68, 68, 0.02) !important;
+}
+.blocked-card:hover {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.2) !important;
+}
+

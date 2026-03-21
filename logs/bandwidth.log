@@ -1,0 +1,606 @@
+2026-03-19 19:33:25,972 [INFO] TrafficController initialized on Windows
+2026-03-19 19:33:26,458 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-19 19:33:26,498 [INFO] [33mPress CTRL+C to quit[0m
+2026-03-19 19:33:26,745 [INFO]  * Restarting with watchdog (windowsapi)
+2026-03-19 19:33:28,023 [INFO] TrafficController initialized on Windows
+2026-03-19 19:33:28,133 [WARNING]  * Debugger is active!
+2026-03-19 19:33:28,148 [INFO]  * Debugger PIN: 268-505-075
+2026-03-19 19:37:06,072 [INFO] 🚀 Testing Unicode Logging: 🤖 ✅
+2026-03-19 19:37:43,385 [INFO] TrafficController initialized on Windows
+2026-03-19 19:38:00,503 [INFO] TrafficController initialized on Windows
+2026-03-19 19:38:00,510 [INFO] 🚀 Smart Bandwidth Management System Starting with Auth & Logging...
+2026-03-19 19:38:00,595 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-19 19:38:00,596 [INFO] [33mPress CTRL+C to quit[0m
+2026-03-19 19:38:00,630 [INFO]  * Restarting with watchdog (windowsapi)
+2026-03-19 19:38:01,768 [INFO] TrafficController initialized on Windows
+2026-03-19 19:38:01,778 [INFO] 🚀 Smart Bandwidth Management System Starting with Auth & Logging...
+2026-03-19 19:38:01,839 [WARNING]  * Debugger is active!
+2026-03-19 19:38:01,846 [INFO]  * Debugger PIN: 268-505-075
+2026-03-19 19:38:28,206 [INFO] 127.0.0.1 - - [19/Mar/2026 19:38:28] "[32mGET / HTTP/1.1[0m" 302 -
+2026-03-19 19:38:28,291 [INFO] 127.0.0.1 - - [19/Mar/2026 19:38:28] "GET /login HTTP/1.1" 200 -
+2026-03-19 19:38:28,734 [INFO] 127.0.0.1 - - [19/Mar/2026 19:38:28] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-19 19:38:39,886 [ERROR] AUTH: Failed login attempt
+2026-03-19 19:38:39,891 [INFO] 127.0.0.1 - - [19/Mar/2026 19:38:39] "POST /login HTTP/1.1" 200 -
+2026-03-19 19:38:58,400 [INFO] AUTH: Admin logged in successfully
+2026-03-19 19:38:58,402 [INFO] 127.0.0.1 - - [19/Mar/2026 19:38:58] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-03-19 19:38:58,429 [INFO] 127.0.0.1 - - [19/Mar/2026 19:38:58] "GET / HTTP/1.1" 200 -
+2026-03-19 19:38:58,753 [INFO] 127.0.0.1 - - [19/Mar/2026 19:38:58] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-03-19 19:38:58,803 [INFO] 127.0.0.1 - - [19/Mar/2026 19:38:58] "GET /static/js/dashboard.js HTTP/1.1" 200 -
+2026-03-19 19:38:59,191 [INFO] 127.0.0.1 - - [19/Mar/2026 19:38:59] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:01,189 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:01] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:03,184 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:03] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:05,202 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:05] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:07,203 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:07] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:09,189 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:09] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:11,185 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:11] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:13,187 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:13] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:15,188 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:15] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:17,187 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:17] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:19,187 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:19] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:21,181 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:21] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:23,182 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:23] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:25,193 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:25] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:27,186 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:27] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:29,193 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:29] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:31,182 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:31] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:33,197 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:33] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:35,189 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:37,189 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:37] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:39,236 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:39] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:41,191 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:41] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:43,201 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:43] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:45,183 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:45] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:47,184 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:47] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:49,185 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:49] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:51,179 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:51] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:53,183 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:53] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:55,179 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:55] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:57,192 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:57] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:39:59,193 [INFO] 127.0.0.1 - - [19/Mar/2026 19:39:59] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:01,195 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:01] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:03,193 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:03] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:05,188 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:05] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:07,182 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:07] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:09,192 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:09] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:11,191 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:11] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:13,204 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:13] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:15,177 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:15] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:17,183 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:17] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:19,179 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:19] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:21,195 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:21] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:23,195 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:23] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:25,186 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:25] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:27,588 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:27] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:29,577 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:29] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:31,573 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:31] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:33,576 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:33] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:35,567 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:37,577 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:37] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:39,574 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:39] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:41,574 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:41] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:43,587 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:43] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:45,191 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:45] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:47,578 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:47] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:49,567 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:49] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:51,583 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:51] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:53,569 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:53] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:55,568 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:55] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:57,566 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:57] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:40:59,566 [INFO] 127.0.0.1 - - [19/Mar/2026 19:40:59] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:01,576 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:01] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:03,566 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:03] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:05,582 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:05] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:07,569 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:07] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:09,568 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:09] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:11,581 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:11] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:13,580 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:13] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:15,565 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:15] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:17,587 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:17] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:19,566 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:19] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:21,586 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:21] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:23,587 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:23] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:25,584 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:25] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:27,583 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:27] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:29,592 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:29] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:31,571 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:31] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:33,570 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:33] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:35,565 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:37,581 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:37] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:39,571 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:39] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:41,571 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:41] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:43,586 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:43] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:41:45,579 [INFO] 127.0.0.1 - - [19/Mar/2026 19:41:45] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:02,534 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:02] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:03,179 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:03] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:05,190 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:05] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:07,191 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:07] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:09,189 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:09] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:11,182 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:11] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:13,188 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:13] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:15,193 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:15] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:17,199 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:17] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:19,226 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:19] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:21,193 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:21] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:23,188 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:23] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:25,563 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:25] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:27,563 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:27] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:29,569 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:29] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:31,603 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:31] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:33,578 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:33] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:35,562 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:37,593 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:37] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:39,571 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:39] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:41,582 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:41] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:43,574 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:43] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:45,571 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:45] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:47,578 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:47] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:49,588 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:49] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:51,565 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:51] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:53,570 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:53] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:55,570 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:55] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:57,582 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:57] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:42:59,585 [INFO] 127.0.0.1 - - [19/Mar/2026 19:42:59] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:43:01,570 [INFO] 127.0.0.1 - - [19/Mar/2026 19:43:01] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:43:03,570 [INFO] 127.0.0.1 - - [19/Mar/2026 19:43:03] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:43:05,570 [INFO] 127.0.0.1 - - [19/Mar/2026 19:43:05] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:43:07,586 [INFO] 127.0.0.1 - - [19/Mar/2026 19:43:07] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:43:09,570 [INFO] 127.0.0.1 - - [19/Mar/2026 19:43:09] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:43:11,570 [INFO] 127.0.0.1 - - [19/Mar/2026 19:43:11] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:43:13,573 [INFO] 127.0.0.1 - - [19/Mar/2026 19:43:13] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:43:15,569 [INFO] 127.0.0.1 - - [19/Mar/2026 19:43:15] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:43:17,581 [INFO] 127.0.0.1 - - [19/Mar/2026 19:43:17] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:43:19,571 [INFO] 127.0.0.1 - - [19/Mar/2026 19:43:19] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:43:21,571 [INFO] 127.0.0.1 - - [19/Mar/2026 19:43:21] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:43:23,568 [INFO] 127.0.0.1 - - [19/Mar/2026 19:43:23] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:43:35,569 [INFO] 127.0.0.1 - - [19/Mar/2026 19:43:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:44:35,588 [INFO] 127.0.0.1 - - [19/Mar/2026 19:44:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:45:35,561 [INFO] 127.0.0.1 - - [19/Mar/2026 19:45:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:46:35,572 [INFO] 127.0.0.1 - - [19/Mar/2026 19:46:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:47:35,565 [INFO] 127.0.0.1 - - [19/Mar/2026 19:47:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:48:11,726 [INFO]  * Detected change in 'd:\\project Cn\\scanner.py', reloading
+2026-03-19 19:48:11,958 [INFO]  * Restarting with watchdog (windowsapi)
+2026-03-19 19:48:14,595 [INFO] TrafficController initialized on Windows
+2026-03-19 19:48:14,622 [INFO] 🚀 Smart Bandwidth Management System Starting with Auth & Logging...
+2026-03-19 19:48:14,790 [WARNING]  * Debugger is active!
+2026-03-19 19:48:14,831 [INFO]  * Debugger PIN: 268-505-075
+2026-03-19 19:48:35,558 [INFO] 127.0.0.1 - - [19/Mar/2026 19:48:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:48:50,563 [INFO]  * Detected change in 'd:\\project Cn\\app.py', reloading
+2026-03-19 19:48:50,836 [INFO]  * Restarting with watchdog (windowsapi)
+2026-03-19 19:48:52,077 [INFO] TrafficController initialized on Windows
+2026-03-19 19:48:52,107 [INFO] 🚀 Smart Bandwidth Management System Starting with Auth & Logging...
+2026-03-19 19:48:52,174 [WARNING]  * Debugger is active!
+2026-03-19 19:48:52,183 [INFO]  * Debugger PIN: 268-505-075
+2026-03-19 19:49:11,373 [INFO]  * Detected change in 'd:\\project Cn\\traffic_control.py', reloading
+2026-03-19 19:49:11,591 [INFO]  * Restarting with watchdog (windowsapi)
+2026-03-19 19:49:12,591 [INFO] TrafficController (Industry Upgrade) initialized on Windows
+2026-03-19 19:49:12,604 [INFO] 🚀 Smart Bandwidth Management System Starting with Auth & Logging...
+2026-03-19 19:49:12,668 [WARNING]  * Debugger is active!
+2026-03-19 19:49:12,674 [INFO]  * Debugger PIN: 268-505-075
+2026-03-19 19:57:01,713 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:01] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:03,152 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:03] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:05,159 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:05] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:07,164 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:07] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:09,156 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:09] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:11,158 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:11] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:13,158 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:13] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:15,229 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:15] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:17,157 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:17] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:19,157 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:19] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:21,156 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:21] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:23,157 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:23] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:25,157 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:25] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:27,161 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:27] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:29,155 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:29] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:31,154 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:31] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:33,156 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:33] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:35,157 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:37,158 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:37] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:39,153 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:39] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:41,153 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:41] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:42,838 [INFO]  * Detected change in 'd:\\project Cn\\traffic_control.py', reloading
+2026-03-19 19:57:43,157 [INFO]  * Restarting with watchdog (windowsapi)
+2026-03-19 19:57:44,652 [INFO] TrafficController (Industry Upgrade) initialized on Windows
+2026-03-19 19:57:44,677 [INFO] 🚀 Smart Bandwidth Management System Starting with Auth & Logging...
+2026-03-19 19:57:44,781 [WARNING]  * Debugger is active!
+2026-03-19 19:57:44,797 [INFO]  * Debugger PIN: 268-505-075
+2026-03-19 19:57:44,939 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:44] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:45,157 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:45] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:47,154 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:47] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:49,155 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:49] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:51,153 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:51] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:53,151 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:53] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:55,153 [INFO] 127.0.0.1 - - [19/Mar/2026 19:57:55] "GET /api/status HTTP/1.1" 200 -
+2026-03-19 19:57:57,891 [INFO]  * Detected change in 'd:\\project Cn\\app.py', reloading
+2026-03-19 19:57:58,694 [INFO]  * Restarting with watchdog (windowsapi)
+2026-03-19 19:57:59,839 [INFO] TrafficController (Industry Upgrade) initialized on Windows
+2026-03-19 19:57:59,856 [INFO] 🚀 Smart Bandwidth Management System Starting with Auth & Logging...
+2026-03-19 19:57:59,920 [WARNING]  * Debugger is active!
+2026-03-19 19:57:59,933 [INFO]  * Debugger PIN: 268-505-075
+2026-03-21 09:22:26,078 [INFO] TrafficController Production Ready (Interface: enp0s3)
+2026-03-21 09:25:27,851 [INFO] TrafficController Production Ready (Interface: enp0s3)
+2026-03-21 09:26:04,972 [INFO] TrafficController Production Ready (Interface: enp0s3)
+2026-03-21 09:26:04,991 [INFO] SYSTEM_STARTUP: Environment verification successful.
+2026-03-21 09:26:05,011 [INFO] SmartNet Production Engine active on DESKTOP-CFI6KAM
+2026-03-21 09:26:05,977 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.255.84.131:5000
+2026-03-21 09:26:05,983 [INFO] [33mPress CTRL+C to quit[0m
+2026-03-21 09:28:09,552 [INFO] TrafficController Production Ready (Interface: enp0s3)
+2026-03-21 09:28:09,566 [INFO] SYSTEM_STARTUP: Environment verification successful.
+2026-03-21 09:28:09,601 [INFO] SmartNet Production Engine active on DESKTOP-CFI6KAM
+2026-03-21 09:28:10,589 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.255.84.131:5000
+2026-03-21 09:28:10,627 [INFO] [33mPress CTRL+C to quit[0m
+2026-03-21 09:28:15,897 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:15] "[32mGET / HTTP/1.1[0m" 302 -
+2026-03-21 09:28:16,031 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:16] "GET /login HTTP/1.1" 200 -
+2026-03-21 09:28:16,678 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:16] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-21 09:28:19,058 [INFO] AUTH: Admin logged in successfully
+2026-03-21 09:28:19,060 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:19] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-03-21 09:28:19,087 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:19] "GET / HTTP/1.1" 200 -
+2026-03-21 09:28:19,293 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:19] "GET /static/js/dashboard.js HTTP/1.1" 200 -
+2026-03-21 09:28:19,293 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:19] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-03-21 09:28:20,301 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:20] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:21,311 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:21] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:22,313 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:22] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:23,311 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:23] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:24,310 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:24] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:25,311 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:25] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:26,311 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:26] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:27,311 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:27] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:28,313 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:28] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:29,313 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:29] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:30,313 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:30] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:31,310 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:31] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:32,307 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:32] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:33,310 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:33] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:34,310 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:34] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:35,309 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:36,245 [WARNING] SECURITY_ACTION: Blocking IP 192.168.1.15
+2026-03-21 09:28:36,248 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:36] "POST /api/block HTTP/1.1" 200 -
+2026-03-21 09:28:36,257 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:36] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:36,307 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:36] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:37,330 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:37] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:38,309 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:38] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:39,314 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:39] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:40,313 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:40] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:41,310 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:41] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:41,970 [INFO] SECURITY_ACTION: Unblocking IP 192.168.1.15
+2026-03-21 09:28:41,973 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:41] "POST /api/unblock HTTP/1.1" 200 -
+2026-03-21 09:28:41,982 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:41] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:42,314 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:42] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:43,309 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:43] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:44,310 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:44] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:45,313 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:45] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:46,129 [INFO] SYSTEM_MODE: Switched to AUTO
+2026-03-21 09:28:46,130 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:46] "POST /api/set_mode HTTP/1.1" 200 -
+2026-03-21 09:28:46,139 [INFO] Scanning network using ARP...
+2026-03-21 09:28:46,193 [INFO] New device discovered: 192.168.56.255 (FF:FF:FF:FF:FF:FF)
+2026-03-21 09:28:46,194 [INFO] New device discovered: 224.0.0.22 (01:00:5E:00:00:16)
+2026-03-21 09:28:46,195 [INFO] New device discovered: 224.0.0.251 (01:00:5E:00:00:FB)
+2026-03-21 09:28:46,196 [INFO] New device discovered: 224.0.0.252 (01:00:5E:00:00:FC)
+2026-03-21 09:28:46,197 [INFO] New device discovered: 239.255.255.250 (01:00:5E:7F:FF:FA)
+2026-03-21 09:28:46,198 [INFO] New device discovered: 10.255.84.83 (FE:E8:3B:9F:D3:7B)
+2026-03-21 09:28:46,201 [INFO] New device discovered: 10.255.84.255 (FF:FF:FF:FF:FF:FF)
+2026-03-21 09:28:46,203 [INFO] New device discovered: 224.0.0.22 (01:00:5E:00:00:16)
+2026-03-21 09:28:46,205 [INFO] New device discovered: 224.0.0.251 (01:00:5E:00:00:FB)
+2026-03-21 09:28:46,209 [INFO] New device discovered: 224.0.0.252 (01:00:5E:00:00:FC)
+2026-03-21 09:28:46,210 [INFO] New device discovered: 239.255.255.250 (01:00:5E:7F:FF:FA)
+2026-03-21 09:28:46,211 [INFO] New device discovered: 255.255.255.255 (FF:FF:FF:FF:FF:FF)
+2026-03-21 09:28:46,217 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:46] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:46,303 [INFO] Scanning network using ARP...
+2026-03-21 09:28:46,347 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:46] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:47,310 [INFO] Scanning network using ARP...
+2026-03-21 09:28:47,389 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:47] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:48,307 [INFO] Scanning network using ARP...
+2026-03-21 09:28:48,388 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:48] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:49,313 [INFO] Scanning network using ARP...
+2026-03-21 09:28:49,407 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:49] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:50,301 [INFO] Scanning network using ARP...
+2026-03-21 09:28:50,356 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:50] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:51,306 [INFO] Scanning network using ARP...
+2026-03-21 09:28:51,362 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:51] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:52,310 [INFO] Scanning network using ARP...
+2026-03-21 09:28:52,392 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:52] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:53,306 [INFO] Scanning network using ARP...
+2026-03-21 09:28:53,364 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:53] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:54,316 [INFO] Scanning network using ARP...
+2026-03-21 09:28:54,421 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:54] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:55,311 [INFO] Scanning network using ARP...
+2026-03-21 09:28:55,390 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:55] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:56,309 [INFO] Scanning network using ARP...
+2026-03-21 09:28:56,422 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:56] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:57,309 [INFO] Scanning network using ARP...
+2026-03-21 09:28:57,397 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:57] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:58,310 [INFO] Scanning network using ARP...
+2026-03-21 09:28:58,396 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:58] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:28:59,304 [INFO] Scanning network using ARP...
+2026-03-21 09:28:59,362 [INFO] 127.0.0.1 - - [21/Mar/2026 09:28:59] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:00,310 [INFO] Scanning network using ARP...
+2026-03-21 09:29:00,380 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:00] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:01,309 [INFO] Scanning network using ARP...
+2026-03-21 09:29:01,397 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:01] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:02,305 [INFO] Scanning network using ARP...
+2026-03-21 09:29:02,386 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:02] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:03,311 [INFO] Scanning network using ARP...
+2026-03-21 09:29:03,391 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:03] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:04,311 [INFO] Scanning network using ARP...
+2026-03-21 09:29:04,388 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:04] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:05,309 [INFO] Scanning network using ARP...
+2026-03-21 09:29:05,384 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:05] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:06,312 [INFO] Scanning network using ARP...
+2026-03-21 09:29:06,418 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:06] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:07,302 [INFO] Scanning network using ARP...
+2026-03-21 09:29:07,373 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:07] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:08,309 [INFO] Scanning network using ARP...
+2026-03-21 09:29:08,381 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:08] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:09,308 [INFO] Scanning network using ARP...
+2026-03-21 09:29:09,398 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:09] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:10,303 [INFO] Scanning network using ARP...
+2026-03-21 09:29:10,388 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:10] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:11,310 [INFO] Scanning network using ARP...
+2026-03-21 09:29:11,396 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:11] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:12,311 [INFO] Scanning network using ARP...
+2026-03-21 09:29:12,385 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:12] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:13,305 [INFO] Scanning network using ARP...
+2026-03-21 09:29:13,390 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:13] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:14,305 [INFO] Scanning network using ARP...
+2026-03-21 09:29:14,369 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:14] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:15,308 [INFO] Scanning network using ARP...
+2026-03-21 09:29:15,372 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:15] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:16,311 [INFO] Scanning network using ARP...
+2026-03-21 09:29:16,389 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:16] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:17,308 [INFO] Scanning network using ARP...
+2026-03-21 09:29:17,388 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:17] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:18,314 [INFO] Scanning network using ARP...
+2026-03-21 09:29:18,391 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:18] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:19,306 [INFO] Scanning network using ARP...
+2026-03-21 09:29:19,370 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:19] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:20,305 [INFO] Scanning network using ARP...
+2026-03-21 09:29:20,391 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:20] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:21,311 [INFO] Scanning network using ARP...
+2026-03-21 09:29:21,384 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:21] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:22,308 [INFO] Scanning network using ARP...
+2026-03-21 09:29:22,406 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:22] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:23,315 [INFO] Scanning network using ARP...
+2026-03-21 09:29:23,392 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:23] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:24,305 [INFO] Scanning network using ARP...
+2026-03-21 09:29:24,397 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:24] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:25,315 [INFO] Scanning network using ARP...
+2026-03-21 09:29:25,405 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:25] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:26,319 [INFO] Scanning network using ARP...
+2026-03-21 09:29:26,375 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:26] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:27,314 [INFO] Scanning network using ARP...
+2026-03-21 09:29:27,387 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:27] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:28,950 [INFO] Scanning network using ARP...
+2026-03-21 09:29:29,033 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:29] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:29,933 [INFO] Scanning network using ARP...
+2026-03-21 09:29:30,000 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:29] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:30,934 [INFO] Scanning network using ARP...
+2026-03-21 09:29:31,007 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:31] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:31,941 [INFO] Scanning network using ARP...
+2026-03-21 09:29:32,007 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:32] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:32,932 [INFO] Scanning network using ARP...
+2026-03-21 09:29:33,009 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:33] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:33,938 [INFO] Scanning network using ARP...
+2026-03-21 09:29:34,003 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:34] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:34,934 [INFO] Scanning network using ARP...
+2026-03-21 09:29:35,011 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:35,943 [INFO] Scanning network using ARP...
+2026-03-21 09:29:36,031 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:36] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:36,937 [INFO] Scanning network using ARP...
+2026-03-21 09:29:37,017 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:37] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:37,311 [INFO] Scanning network using ARP...
+2026-03-21 09:29:37,349 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:37] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:38,307 [INFO] Scanning network using ARP...
+2026-03-21 09:29:38,380 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:38] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:39,308 [INFO] Scanning network using ARP...
+2026-03-21 09:29:39,407 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:39] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:40,301 [INFO] Scanning network using ARP...
+2026-03-21 09:29:40,370 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:40] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:40,950 [INFO] SYSTEM_MODE: Switched to MANUAL
+2026-03-21 09:29:40,951 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:40] "POST /api/set_mode HTTP/1.1" 200 -
+2026-03-21 09:29:40,968 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:40] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:41,306 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:41] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:42,315 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:42] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:43,315 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:43] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:44,314 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:44] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:45,315 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:45] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:46,323 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:46] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:47,313 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:47] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:48,324 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:48] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:49,322 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:49] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:50,322 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:50] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:50,772 [INFO] REPORT_GENERATED: reports\usage_report_20260321_092950.csv
+2026-03-21 09:29:50,773 [INFO] REPORT: Generated: reports\usage_report_20260321_092950.csv
+2026-03-21 09:29:50,775 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:50] "POST /api/generate_report HTTP/1.1" 200 -
+2026-03-21 09:29:51,319 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:51] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:52,322 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:52] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:53,320 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:53] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:54,321 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:54] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:55,321 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:55] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:55,768 [INFO] REPORT_GENERATED: reports\usage_report_20260321_092955.csv
+2026-03-21 09:29:55,769 [INFO] REPORT: Generated: reports\usage_report_20260321_092955.csv
+2026-03-21 09:29:55,771 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:55] "POST /api/generate_report HTTP/1.1" 200 -
+2026-03-21 09:29:56,320 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:56] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:57,320 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:57] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:58,315 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:58] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:29:59,320 [INFO] 127.0.0.1 - - [21/Mar/2026 09:29:59] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:00,333 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:00] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:01,312 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:01] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:02,320 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:02] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:03,329 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:03] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:04,018 [INFO] REPORT_GENERATED: reports\usage_report_20260321_093004.csv
+2026-03-21 09:30:04,019 [INFO] REPORT: Generated: reports\usage_report_20260321_093004.csv
+2026-03-21 09:30:04,021 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:04] "POST /api/generate_report HTTP/1.1" 200 -
+2026-03-21 09:30:04,310 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:04] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:05,319 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:05] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:06,316 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:06] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:07,305 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:07] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:08,319 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:08] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:09,334 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:09] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:10,318 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:10] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:11,943 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:11] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:12,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:12] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:13,940 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:13] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:14,934 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:14] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:15,938 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:15] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:16,950 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:16] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:17,930 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:17] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:18,945 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:18] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:19,929 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:19] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:20,930 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:20] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:21,943 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:21] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:22,945 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:22] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:23,943 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:23] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:25,054 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:25] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:25,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:25] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:26,942 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:26] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:27,940 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:27] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:28,949 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:28] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:29,937 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:29] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:30,953 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:30] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:31,946 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:31] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:32,942 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:32] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:33,942 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:33] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:34,940 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:34] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:35,951 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:36,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:36] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:37,945 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:37] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:38,933 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:38] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:39,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:39] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:40,942 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:40] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:41,954 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:41] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:42,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:42] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:43,936 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:43] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:44,945 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:44] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:45,976 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:45] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:47,212 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:47] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:47,946 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:47] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:48,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:48] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:49,945 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:49] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:50,942 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:50] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:51,950 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:51] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:52,947 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:52] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:53,934 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:53] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:54,943 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:54] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:55,934 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:55] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:59,517 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:59] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:59,527 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:59] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:59,537 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:59] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:30:59,955 [INFO] 127.0.0.1 - - [21/Mar/2026 09:30:59] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:00,940 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:00] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:01,937 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:01] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:02,932 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:02] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:03,938 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:03] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:05,125 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:05] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:05,987 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:05] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:06,937 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:06] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:07,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:07] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:08,939 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:08] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:09,932 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:09] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:30,941 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:30] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:34,526 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:34] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:35,310 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:36,312 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:36] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:37,311 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:37] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:38,311 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:38] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:39,308 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:39] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:40,325 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:40] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:41,317 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:41] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:42,312 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:42] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:43,319 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:43] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:44,321 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:44] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:45,316 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:45] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:46,317 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:46] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:47,307 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:47] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:48,310 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:48] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:49,308 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:49] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:49,686 [INFO] REPORT_GENERATED: reports\usage_report_20260321_093149.csv
+2026-03-21 09:31:49,687 [INFO] REPORT: Generated: reports\usage_report_20260321_093149.csv
+2026-03-21 09:31:49,689 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:49] "POST /api/generate_report HTTP/1.1" 200 -
+2026-03-21 09:31:50,311 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:50] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:51,307 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:51] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:52,307 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:52] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:53,307 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:53] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:54,307 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:54] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:55,309 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:55] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:56,940 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:56] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:57,939 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:57] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:58,933 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:58] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:31:59,940 [INFO] 127.0.0.1 - - [21/Mar/2026 09:31:59] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:00,934 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:00] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:01,935 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:01] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:02,936 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:02] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:03,939 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:03] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:04,942 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:04] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:06,131 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:06] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:06,943 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:06] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:07,947 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:07] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:08,935 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:08] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:09,936 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:09] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:10,940 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:10] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:11,951 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:11] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:12,946 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:12] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:13,953 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:13] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:14,936 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:14] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:15,952 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:15] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:16,937 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:16] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:17,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:17] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:18,937 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:18] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:19,937 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:19] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:20,949 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:20] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:21,938 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:21] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:22,945 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:22] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:23,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:23] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:24,946 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:24] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:25,936 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:25] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:26,942 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:26] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:27,946 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:27] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:28,935 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:28] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:29,951 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:29] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:30,935 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:30] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:31,945 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:31] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:32,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:32] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:33,939 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:33] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:34,947 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:34] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:35,938 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:36,941 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:36] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:37,937 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:37] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:38,938 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:38] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:39,935 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:39] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:40,932 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:40] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:41,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:41] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:42,942 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:42] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:43,943 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:43] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:44,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:44] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:45,934 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:45] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:46,933 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:46] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:47,945 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:47] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:48,950 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:48] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:49,945 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:49] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:50,933 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:50] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:51,935 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:51] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:52,938 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:52] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:53,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:53] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:54,944 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:54] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:32:55,941 [INFO] 127.0.0.1 - - [21/Mar/2026 09:32:55] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:33:30,938 [INFO] 127.0.0.1 - - [21/Mar/2026 09:33:30] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:34:30,938 [INFO] 127.0.0.1 - - [21/Mar/2026 09:34:30] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:35:30,936 [INFO] 127.0.0.1 - - [21/Mar/2026 09:35:30] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:36:30,953 [INFO] 127.0.0.1 - - [21/Mar/2026 09:36:30] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:37:30,962 [INFO] 127.0.0.1 - - [21/Mar/2026 09:37:30] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:38:30,933 [INFO] 127.0.0.1 - - [21/Mar/2026 09:38:30] "GET /api/status HTTP/1.1" 200 -
+2026-03-21 09:38:36,214 [INFO] TrafficController Production Ready (Interface: enp0s3)
+2026-03-21 09:38:36,238 [INFO] SYSTEM_STARTUP: Environment verification successful.
+2026-03-21 09:38:36,270 [INFO] SmartNet Production Engine active on DESKTOP-CFI6KAM
+2026-03-21 09:38:37,236 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.255.84.131:5000
+2026-03-21 09:38:37,238 [INFO] [33mPress CTRL+C to quit[0m
+2026-03-21 09:39:30,942 [INFO] 127.0.0.1 - - [21/Mar/2026 09:39:30] "GET /api/status HTTP/1.1" 200 -
