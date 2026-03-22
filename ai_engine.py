@@ -45,18 +45,18 @@ class BWAIEngine:
             # Predict next value
             next_x = np.array([[len(data)]])
             prediction = self.models[ip].predict(next_x)[0]
-            return max(0.1, round(prediction, 2))
+            return float(max(0.1, round(float(prediction), 2)))
         
         # Fallback to trend
         if len(data) >= 2:
             current = data[-1]
             previous = data[-2]
             user_prediction = current + (current - previous)
-            return max(0.1, round(user_prediction, 2))
+            return float(max(0.1, round(float(user_prediction), 2)))
             
         # SMA
         sma = sum(data) / len(data)
-        return round(max(0.1, sma), 2)
+        return float(round(max(0.1, float(sma)), 2))
 
     def detect_anomaly(self, ip, current_value):
         """Detects if current usage is anomalous."""
@@ -68,9 +68,9 @@ class BWAIEngine:
         mean = np.mean(data)
         std = np.std(data)
         if std == 0:
-            return abs(current_value - mean) > 10  # Arbitrary threshold
+            return bool(abs(float(current_value) - float(mean)) > 10)  # Arbitrary threshold
         z_score = abs(current_value - mean) / std
-        return z_score > 2.5  # Anomaly if > 2.5 std devs
+        return bool(z_score > 2.5)  # Anomaly if > 2.5 std devs
 
     def get_network_health(self, users):
         """Calculates a health score from 0-100."""

@@ -29,6 +29,146 @@ body {
     margin: 0 auto;
 }
 
+.topbar {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.topbar-brand {
+    min-width: 260px;
+}
+
+.brand-sub {
+    font-weight: 300;
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.brand-status {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.topbar-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.health-panel {
+    text-align: center;
+    border-right: 1px solid var(--border);
+    padding-right: 1rem;
+}
+
+.health-value {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #10b981;
+}
+
+.health-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.control-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.action-row {
+    gap: 0.65rem;
+}
+
+.form-control {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text-main);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.18);
+}
+
+.form-control-wide {
+    min-width: 220px;
+}
+
+.form-control-sm {
+    width: 120px;
+}
+
+.form-control-md {
+    width: 140px;
+}
+
+.form-control-select {
+    min-width: 120px;
+}
+
+.action-smart-scan {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: #10b981;
+}
+
+.action-danger {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+}
+
+.action-primary-soft {
+    background: rgba(88, 101, 242, 0.12);
+    border-color: var(--primary);
+}
+
+.stats-panel {
+    text-align: right;
+    min-width: 165px;
+}
+
+.stats-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.stats-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.section-title {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.section-title-lg {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.section-muted {
+    color: var(--text-muted);
+}
+
+.chart-no-top-gap {
+    margin-top: 0;
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -109,6 +249,7 @@ h1 {
 .controls {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .prio-btn {
@@ -124,6 +265,13 @@ h1 {
 
 .prio-btn:hover {
     background: var(--primary);
+}
+
+.prio-btn:focus-visible,
+.mode-btn:focus-visible,
+.logout-btn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 .prio-btn.active {
@@ -305,5 +453,93 @@ h1 {
 }
 .blocked-card:hover {
     box-shadow: 0 0 20px rgba(239, 68, 68, 0.2) !important;
+}
+
+@media (max-width: 1200px) {
+    body {
+        padding: 1.25rem;
+    }
+
+    .topbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .topbar-controls {
+        justify-content: flex-start;
+    }
+
+    .stats-panel {
+        text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        margin-bottom: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.55rem;
+    }
+
+    .status-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .chart-container {
+        padding: 1rem;
+        border-radius: 14px;
+    }
+
+    .card {
+        padding: 1rem;
+        border-radius: 14px;
+    }
+
+    .usage-value {
+        font-size: 2rem;
+    }
+
+    .mode-toggle-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .mode-btn {
+        flex: 1;
+        text-align: center;
+    }
+
+    .form-control-wide,
+    .form-control-sm,
+    .form-control-md,
+    .form-control-select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .control-row {
+        width: 100%;
+    }
+
+    .prio-btn,
+    .logout-btn,
+    .action-smart-scan,
+    .action-danger,
+    .action-primary-soft {
+        width: 100%;
+        text-align: center;
+    }
+
+    .health-panel {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding-right: 0;
+        padding-bottom: 0.5rem;
+        width: 100%;
+    }
 }
 

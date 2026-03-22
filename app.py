@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import threading
 import ipaddress
 import platform
 import subprocess
@@ -10,7 +11,7 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 from config import (
     NETWORK_INTERFACE, SCAN_SUBNET, SYSTEM_MODE, LOG_FILE, 
     ADMIN_USER, ADMIN_PASS, SECRET_KEY, REFRESH_INTERVAL, 
-    IS_LINUX, REQUIRED_TOOLS, HISTORY_LIMIT
+    IS_LINUX, REQUIRED_TOOLS, HISTORY_LIMIT, AUTO_SCAN_INTERVAL
 )
 from traffic_control import tc_manager
 from logger import logger, log_action, log_error
@@ -49,6 +50,8 @@ app.secret_key = SECRET_KEY
 current_mode = SYSTEM_MODE if SYSTEM_MODE in ["MANUAL", "AUTO", "SMART"] else "MANUAL"
 users_db = scanner.devices
 usage_history = {user['ip']: [] for user in users_db}
+last_background_scan_at = 0.0
+scan_lock = threading.Lock()
 
 
 def _sync_history_keys(devices):
@@ -56,6 +59,17 @@ def _sync_history_keys(devices):
         ip = device.get('ip')
         if ip and ip not in usage_history:
             usage_history[ip] = []
+
+
+def _to_json_safe_bool(value):
+    return bool(value)
+
+
+def _to_json_safe_float(value, default=0.0):
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
 
 
 def _infer_topology(devices):
@@ -151,19 +165,26 @@ def get_status():
     if not is_authenticated():
         return jsonify({"status": "error", "message": "Unauthorized"}), 401
         
-    global users_db, current_mode
+    global users_db, current_mode, last_background_scan_at
     
     # Active Guard Logic (Phase 9)
     if current_mode in ["AUTO", "SMART"]:
-        scan_mode = "smart" if current_mode == "SMART" else "standard"
-        fresh_scanner_devices = scanner.update_device_list(scan_mode=scan_mode)
-        for dev in fresh_scanner_devices:
-            # Auto-block loop (Industry Security)
-            # If status isn't explicitly ACTIVE/ADMIN etc, and it's a new discovery
-            if dev.get('role') == 'Guest' and dev.get('status') != 'ACTIVE':
-                 # Treat as UNKNOWN/Potential Intruder in high-security mode
-                 pass 
-        users_db = fresh_scanner_devices
+        now = time.time()
+        should_scan = (now - last_background_scan_at) >= AUTO_SCAN_INTERVAL
+        if should_scan and scan_lock.acquire(blocking=False):
+            try:
+                scan_mode = "smart" if current_mode == "SMART" else "standard"
+                fresh_scanner_devices = scanner.update_device_list(scan_mode=scan_mode)
+                for dev in fresh_scanner_devices:
+                    # Auto-block loop (Industry Security)
+                    # If status isn't explicitly ACTIVE/ADMIN etc, and it's a new discovery
+                    if dev.get('role') == 'Guest' and dev.get('status') != 'ACTIVE':
+                        # Treat as UNKNOWN/Potential Intruder in high-security mode
+                        pass
+                users_db = fresh_scanner_devices
+                last_background_scan_at = now
+            finally:
+                scan_lock.release()
 
     _sync_history_keys(users_db)
 
@@ -185,16 +206,16 @@ def get_status():
         ip = item['ip']
         if ip not in usage_history:
             usage_history[ip] = []
-        usage_history[ip].append({"time": current_time, "val": item['usage']})
+        usage_history[ip].append({"time": current_time, "val": _to_json_safe_float(item.get('usage', 0.0), 0.0)})
         
         ai_engine.add_data_point(ip, item['usage'])
-        predictions[ip] = ai_engine.predict_next(ip)
-        anomalies[ip] = ai_engine.detect_anomaly(ip, item['usage'])
+        predictions[ip] = _to_json_safe_float(ai_engine.predict_next(ip), 0.0)
+        anomalies[ip] = _to_json_safe_bool(ai_engine.detect_anomaly(ip, item['usage']))
         
         if len(usage_history[ip]) > HISTORY_LIMIT:
             usage_history[ip].pop(0)
     
-    health = ai_engine.get_network_health(current_usage)
+    health = int(ai_engine.get_network_health(current_usage))
             
     return jsonify({
         "users": current_usage,

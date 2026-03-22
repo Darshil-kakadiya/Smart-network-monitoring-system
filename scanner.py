@@ -190,12 +190,39 @@ class NetworkScanner:
 
     def _hosts_from_subnet(self):
         try:
-            network = ipaddress.ip_network(SCAN_SUBNET, strict=False)
+            network = ipaddress.ip_network(self._get_effective_scan_subnet(), strict=False)
             hosts = [str(host) for host in network.hosts()]
             return hosts[:SMART_SCAN_MAX_HOSTS]
         except Exception as exc:
             logger.error(f"Subnet parse failed for {SCAN_SUBNET}: {exc}")
             return []
+
+    def _get_effective_scan_subnet(self):
+        try:
+            configured = ipaddress.ip_network(SCAN_SUBNET, strict=False)
+        except Exception:
+            configured = None
+
+        ipv4_locals = []
+        for candidate in self.local_ips:
+            try:
+                ip_obj = ipaddress.ip_address(candidate)
+                if isinstance(ip_obj, ipaddress.IPv4Address):
+                    ipv4_locals.append(ip_obj)
+            except Exception:
+                continue
+
+        if configured and ipv4_locals:
+            if any(ip in configured for ip in ipv4_locals):
+                return SCAN_SUBNET
+
+        if ipv4_locals:
+            fallback = ipaddress.ip_network(f"{ipv4_locals[0]}/24", strict=False)
+            fallback_subnet = str(fallback)
+            logger.warning(f"Configured SCAN_SUBNET={SCAN_SUBNET} not aligned with local IP. Using {fallback_subnet}")
+            return fallback_subnet
+
+        return SCAN_SUBNET
 
     def _ping_sweep(self):
         if not SMART_SCAN_PING_SWEEP:
@@ -333,7 +360,8 @@ class NetworkScanner:
         """
         logger.info("Scanning network using nmap...")
         try:
-            cmd = ["nmap", "-sn", "-n", "--max-retries", "1", SCAN_SUBNET]
+            effective_subnet = self._get_effective_scan_subnet()
+            cmd = ["nmap", "-sn", "-n", "--max-retries", "1", effective_subnet]
             output = subprocess.check_output(cmd, timeout=SMART_SCAN_TIMEOUT).decode('utf-8', errors='ignore')
             return self.parse_nmap_output(output)
         except Exception as e:

@@ -18,6 +18,7 @@ SECRET_KEY = "super-secret-key-for-auth"
 # Monitoring
 REFRESH_INTERVAL = 1 # Seconds
 HISTORY_LIMIT = 50
+AUTO_SCAN_INTERVAL = 12  # Seconds between auto-mode network scans
 
 # Smart Scanning
 SMART_SCAN_TIMEOUT = 40

@@ -13,32 +13,32 @@
 <body>
     <div class="container">
         <header>
-            <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                <div>
-                    <h1>SmartNet <span style="font-weight: 300; font-size: 1.2rem; color: #6366f1;">AI-POWERED</span></h1>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+            <div class="topbar">
+                <div class="topbar-brand">
+                    <h1>SmartNet <span class="brand-sub">AI-POWERED</span></h1>
+                    <p class="brand-status">
                         <span class="live-indicator"></span> Real-time Network Intelligence
                     </p>
                 </div>
-                <div style="display: flex; align-items: center; gap: 1.5rem;">
-                    <div id="health-score-container" style="text-align: center; border-right: 1px solid var(--border); padding-right: 1.5rem;">
-                        <p style="font-size: 1.2rem; font-weight: 800; color: #10b981;" id="health-score">100</p>
-                        <p style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Health Score</p>
+                <div class="topbar-controls">
+                    <div id="health-score-container" class="health-panel">
+                        <p class="health-value" id="health-score">100</p>
+                        <p class="health-label">Health Score</p>
                     </div>
                     <div id="mode-controls" class="mode-toggle-group">
                         <button onclick="setMode('MANUAL')" id="btn-manual" class="mode-btn active">MANUAL</button>
                         <button onclick="setMode('AUTO')" id="btn-auto" class="mode-btn">AUTO-SCAN</button>
                         <button onclick="setMode('SMART')" id="btn-smart" class="mode-btn">SMART</button>
                     </div>
-                    <button onclick="scanNetwork('smart')" class="prio-btn" style="background: rgba(16, 185, 129, 0.12); border-color: #10b981;">🔎 ONE-CLICK SMART SCAN</button>
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <input id="manual-ip" type="text" autocomplete="off" placeholder="Enter IP (e.g. 192.168.1.20)" title="Type an IPv4/IPv6 address and press Enter or CHECK IP" style="padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-main); min-width: 220px;">
+                    <button onclick="scanNetwork('smart')" class="prio-btn action-smart-scan">🔎 ONE-CLICK SMART SCAN</button>
+                    <div class="control-row">
+                        <input id="manual-ip" type="text" autocomplete="off" placeholder="Enter IP (e.g. 192.168.1.20)" title="Type an IPv4/IPv6 address and press Enter or CHECK IP" class="form-control form-control-wide">
                         <button onclick="checkManualIP()" class="prio-btn">CHECK IP</button>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <input id="manual-user-ip" type="text" autocomplete="off" placeholder="User IP" style="padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-main); width: 120px;">
-                        <input id="manual-user-name" type="text" autocomplete="off" placeholder="User Name" style="padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-main); width: 140px;">
-                        <select id="manual-user-role" style="padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-main);">
+                    <div class="control-row">
+                        <input id="manual-user-ip" type="text" autocomplete="off" placeholder="User IP" class="form-control form-control-sm">
+                        <input id="manual-user-name" type="text" autocomplete="off" placeholder="User Name" class="form-control form-control-md">
+                        <select id="manual-user-role" class="form-control form-control-select">
                             <option>Guest</option>
                             <option>Student</option>
                             <option>Teacher</option>
@@ -46,11 +46,13 @@
                         </select>
                         <button onclick="addManualUserIP()" class="prio-btn">ADD USER IP</button>
                     </div>
-                    <button onclick="cleanupUnnecessaryIPs()" class="prio-btn" style="background: rgba(239, 68, 68, 0.1); border-color: #ef4444;">🧹 CLEAN IPs</button>
-                    <button onclick="generateReport()" class="prio-btn" style="background: rgba(99, 102, 241, 0.1); border-color: var(--primary);">📊 REPORT</button>
-                    <div id="global-stats" style="text-align: right;">
-                        <p style="font-size: 1.2rem; font-weight: 700;" id="total-usage">0.00 Mbps</p>
-                        <p style="font-size: 0.8rem; color: var(--text-muted);">Current Network Load</p>
+                    <div class="control-row action-row">
+                        <button onclick="cleanupUnnecessaryIPs()" class="prio-btn action-danger">🧹 CLEAN IPs</button>
+                        <button onclick="generateReport()" class="prio-btn action-primary-soft">📊 REPORT</button>
+                    </div>
+                    <div id="global-stats" class="stats-panel">
+                        <p class="stats-value" id="total-usage">0.00 Mbps</p>
+                        <p class="stats-label">Current Network Load</p>
                     </div>
                     <a href="/logout" class="logout-btn">Logout</a>
                 </div>
@@ -71,18 +73,18 @@
             <!-- User cards will be injected here -->
         </div>
 
-        <div class="chart-container" id="device-details-panel" style="margin-top: 0;">
-            <h2 style="margin-bottom: 1rem; font-size: 1.1rem;">Selected Device Network Division</h2>
-            <div id="device-details-content" style="color: var(--text-muted);">Click any device card to view detailed network division.</div>
+        <div class="chart-container chart-no-top-gap" id="device-details-panel">
+            <h2 class="section-title">Selected Device Network Division</h2>
+            <div id="device-details-content" class="section-muted">Click any device card to view detailed network division.</div>
         </div>
 
         <div class="chart-container">
-            <h2 style="margin-bottom: 1rem; font-size: 1.1rem;">Detected Network Topology</h2>
-            <div id="topology-content" style="color: var(--text-muted);">Topology data is loading...</div>
+            <h2 class="section-title">Detected Network Topology</h2>
+            <div id="topology-content" class="section-muted">Topology data is loading...</div>
         </div>
 
         <div class="chart-container">
-            <h2 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Detailed Traffic Analysis</h2>
+            <h2 class="section-title section-title-lg">Detailed Traffic Analysis</h2>
             <canvas id="trafficChart" height="100"></canvas>
         </div>
     </div>
