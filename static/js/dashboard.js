@@ -1,8 +1,14 @@
 let trafficChart;
 let currentMode = "MANUAL";
 let selectedDeviceIp = null;
+let isStatusRequestInFlight = false;
 
 async function updateDashboard() {
+    if (isStatusRequestInFlight) {
+        return;
+    }
+
+    isStatusRequestInFlight = true;
     try {
         const response = await fetch('/api/status');
         const data = await response.json();
@@ -35,7 +41,7 @@ async function updateDashboard() {
 
         renderUserCards(data.users, data.predictions);
         updateChart(data.history);
-        renderTopology(data.topology);
+        renderTopology(data.topology, data.scan || null);
 
         if (selectedDeviceIp && data.users.some(user => user.ip === selectedDeviceIp)) {
             viewDeviceDetails(selectedDeviceIp, true);
@@ -43,6 +49,8 @@ async function updateDashboard() {
 
     } catch (err) {
         console.error("Dashboard update failed:", err);
+    } finally {
+        isStatusRequestInFlight = false;
     }
 }
 
@@ -86,7 +94,9 @@ async function scanNetwork(scanMode = 'smart') {
     const data = await response.json();
     if (data.status === 'success') {
         const mode = (data.scan_mode || scanMode).toUpperCase();
-        showToast(`${mode} scan complete! Found ${data.devices.length} devices.`);
+        const scanInfo = data.scan || {};
+        const subnetCount = (scanInfo.scanned_subnets || []).length;
+        showToast(`${mode} scan complete! Found ${data.devices.length} devices across ${subnetCount} subnet(s).`);
         updateDashboard();
     } else {
         showToast(data.message || 'Scan failed');
@@ -362,11 +372,17 @@ async function viewDeviceDetails(ip, silent = false) {
     }
 }
 
-function renderTopology(topology) {
+function renderTopology(topology, scanInfo = null) {
     const panel = document.getElementById('topology-content');
     if (!panel || !topology) return;
 
     const typeCounts = topology.device_type_counts || {};
+    const subnets = (scanInfo && scanInfo.scanned_subnets) ? scanInfo.scanned_subnets : [];
+    const sourceBreakdown = (scanInfo && scanInfo.source_breakdown) ? scanInfo.source_breakdown : {};
+    const sourceText = Object.keys(sourceBreakdown).length
+        ? Object.entries(sourceBreakdown).map(([k, v]) => `${k}:${v}`).join(' • ')
+        : 'N/A';
+    const durationText = scanInfo && Number.isFinite(scanInfo.duration_ms) ? `${scanInfo.duration_ms} ms` : 'N/A';
 
     panel.innerHTML = `
         <div style="margin-bottom: 0.6rem;">
@@ -375,6 +391,9 @@ function renderTopology(topology) {
         </div>
         <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.45rem;">Likely layout: ${topology.likely_layout || 'N/A'}</div>
         <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.45rem;">Nodes: ${(topology.nodes || []).length} • Links: ${(topology.links || []).length} • Subnets: ${topology.subnet_count || 0}</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.45rem;">Last scan mode: ${(scanInfo && scanInfo.mode) ? scanInfo.mode.toUpperCase() : 'N/A'} • Duration: ${durationText}</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.45rem;">Scanned subnets: ${subnets.length ? subnets.join(', ') : 'N/A'}</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.45rem;">Sources: ${sourceText}</div>
         <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.7rem;">This PC: ${typeCounts['This PC'] || 0} • PC: ${typeCounts['PC'] || 0} • Laptop: ${typeCounts['Laptop'] || 0} • Mobile: ${typeCounts['Mobile'] || 0} • Unknown: ${typeCounts['Unknown'] || 0}</div>
         <div style="display: flex; flex-wrap: wrap; gap: 8px;">
             ${(topology.nodes || []).map(node => `<span class="badge badge-guest">${node.label}</span>`).join('')}

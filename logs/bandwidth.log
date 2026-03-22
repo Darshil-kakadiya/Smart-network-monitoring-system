@@ -388,3 +388,111 @@
 2026-03-22 10:17:18,594 [INFO] 127.0.0.1 - - [22/Mar/2026 10:17:18] "GET /api/device/192.168.1.15/details HTTP/1.1" 200 -
 2026-03-22 10:17:19,586 [INFO] 127.0.0.1 - - [22/Mar/2026 10:17:19] "GET /api/status HTTP/1.1" 200 -
 2026-03-22 10:17:19,661 [INFO] 127.0.0.1 - - [22/Mar/2026 10:17:19] "GET /api/device/192.168.1.15/details HTTP/1.1" 200 -
+2026-03-22 10:22:47,324 [WARNING] Configured SCAN_SUBNET=192.168.1.0/24 not aligned with active interfaces. Using dynamic subnet 192.168.56.0/24
+2026-03-22 10:23:28,701 [WARNING] Configured SCAN_SUBNET=192.168.1.0/24 not aligned with active interfaces. Using dynamic subnet 192.168.56.0/24
+2026-03-22 10:24:16,905 [WARNING] Configured SCAN_SUBNET=192.168.1.0/24 not aligned with active interfaces. Using dynamic subnet 192.168.56.0/24
+2026-03-22 10:24:50,569 [WARNING] Configured SCAN_SUBNET=192.168.1.0/24 not aligned with active interfaces. Using dynamic subnet 192.168.56.0/24
+2026-03-22 10:30:19,463 [INFO] TrafficController Production Ready (Interface: enp0s3)
+2026-03-22 10:30:58,323 [INFO] SYSTEM_STARTUP: Environment verification successful.
+2026-03-22 10:31:11,359 [INFO] TrafficController Production Ready (Interface: enp0s3)
+2026-03-22 10:31:50,191 [INFO] SYSTEM_STARTUP: Environment verification successful.
+2026-03-22 10:32:48,500 [INFO] TrafficController Production Ready (Interface: enp0s3)
+2026-03-22 10:33:25,240 [INFO] SYSTEM_STARTUP: Environment verification successful.
+2026-03-22 10:33:25,307 [INFO] SmartNet Production Engine active on DESKTOP-CFI6KAM
+2026-03-22 10:33:25,344 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.255.84.131:5000
+2026-03-22 10:33:25,349 [INFO] [33mPress CTRL+C to quit[0m
+2026-03-22 10:33:28,845 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:28] "GET / HTTP/1.1" 200 -
+2026-03-22 10:33:29,517 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:29] "GET /static/js/dashboard.js HTTP/1.1" 200 -
+2026-03-22 10:33:29,661 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:29] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-03-22 10:33:30,094 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:30] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:30,534 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:30] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:31,059 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:31] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:32,046 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:32] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:33,234 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:33] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:34,087 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:34] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:34,300 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:34] "GET /api/device/192.168.1.15/details HTTP/1.1" 200 -
+2026-03-22 10:33:35,097 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:36,110 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:36] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:37,060 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:37] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:38,199 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:38] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:39,095 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:39] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:40,063 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:40] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:41,047 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:41] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:42,079 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:42] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:43,108 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:43] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:44,085 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:44] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:45,077 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:45] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:46,073 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:46] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:47,088 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:47] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:48,075 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:48] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:49,087 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:49] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:50,086 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:50] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:50,769 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:50] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:33:51,071 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:51] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:51,125 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:51] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:33:52,081 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:52] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:52,144 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:52] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:33:53,078 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:53] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:53,130 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:53] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:33:54,073 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:54] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:54,124 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:54] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:33:55,098 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:55] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:55,148 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:55] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:33:56,095 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:56] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:56,139 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:56] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:33:57,081 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:57] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:33:57,149 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:57] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:33:57,992 [INFO] SYSTEM_MODE: Switched to AUTO
+2026-03-22 10:33:57,994 [INFO] 127.0.0.1 - - [22/Mar/2026 10:33:57] "POST /api/set_mode HTTP/1.1" 200 -
+2026-03-22 10:33:58,008 [WARNING] Configured SCAN_SUBNET=192.168.1.0/24 not aligned with active interfaces. Using dynamic subnets ['192.168.56.0/24', '10.255.84.0/24']
+2026-03-22 10:33:58,009 [INFO] Scanning network using ARP...
+2026-03-22 10:34:18,077 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:18] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:18,122 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:18] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:19,080 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:19] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:19,133 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:19] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:20,080 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:20] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:20,154 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:20] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:21,085 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:21] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:21,136 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:21] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:22,073 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:22] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:22,136 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:22] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:23,086 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:23] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:23,112 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:23] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:24,084 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:24] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:24,137 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:24] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:25,086 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:25] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:25,145 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:25] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:26,112 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:26] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:26,178 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:26] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:27,068 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:27] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:27,109 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:27] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:28,081 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:28] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:28,129 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:28] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:29,095 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:29] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:29,143 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:29] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:30,105 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:30] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:30,159 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:30] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:31,104 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:31] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:31,170 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:31] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:32,094 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:32] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:32,139 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:32] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:33,106 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:33] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:33,161 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:33] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:34,084 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:34] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:34,132 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:34] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:35,097 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:35] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:35,137 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:35] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:36,095 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:36] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:36,175 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:36] "GET /api/device/10.255.84.83/details HTTP/1.1" 200 -
+2026-03-22 10:34:36,351 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:36] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:34:36,438 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:36] "GET /api/device/192.168.1.15/details HTTP/1.1" 200 -
+2026-03-22 10:34:42,099 [INFO] 127.0.0.1 - - [22/Mar/2026 10:34:42] "GET /api/status HTTP/1.1" 200 -
+2026-03-22 10:41:10,651 [INFO] TrafficController Production Ready (Interface: enp0s3)
+2026-03-22 10:41:47,375 [INFO] SYSTEM_STARTUP: Environment verification successful.
+2026-03-22 10:42:18,844 [INFO] TrafficController Production Ready (Interface: enp0s3)
+2026-03-22 10:42:48,198 [INFO] TrafficController Production Ready (Interface: enp0s3)
+2026-03-22 10:42:56,092 [INFO] SYSTEM_STARTUP: Environment verification successful.
+2026-03-22 10:43:30,892 [INFO] SYSTEM_STARTUP: Environment verification successful.

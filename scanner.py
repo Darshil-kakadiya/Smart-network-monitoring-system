@@ -4,6 +4,7 @@ import json
 import os
 import socket
 import ipaddress
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from logger import logger
 from config import (
@@ -12,6 +13,7 @@ from config import (
     IS_LINUX,
     SMART_SCAN_TIMEOUT,
     SMART_SCAN_MAX_HOSTS,
+    SMART_SCAN_MAX_SUBNETS,
     SMART_SCAN_PING_SWEEP,
     SMART_SCAN_INCLUDE_HOSTNAME_RESOLVE,
 )
@@ -21,7 +23,38 @@ class NetworkScanner:
         self.devices = []
         self.local_hostname = socket.gethostname()
         self.local_ips = self._get_local_ips()
+        self.local_ipv4_networks = self._get_local_ipv4_networks()
+        self.last_scan_details = {
+            "mode": "startup",
+            "scanned_subnets": [],
+            "source_breakdown": {},
+            "discovered_count": 0,
+            "duration_ms": 0,
+            "timestamp": int(time.time())
+        }
         self.load_devices()
+
+    def _record_scan_details(self, mode, subnets, discovered):
+        source_breakdown = {}
+        for item in discovered or []:
+            for source in item.get("scan_sources", []):
+                source_breakdown[source] = source_breakdown.get(source, 0) + 1
+
+        self.last_scan_details = {
+            "mode": mode,
+            "scanned_subnets": list(subnets or []),
+            "source_breakdown": source_breakdown,
+            "discovered_count": len(discovered or []),
+            "known_devices": len(self.devices),
+            "duration_ms": 0,
+            "timestamp": int(time.time())
+        }
+
+    def _set_scan_duration(self, started_at):
+        try:
+            self.last_scan_details["duration_ms"] = int((time.time() - started_at) * 1000)
+        except Exception:
+            self.last_scan_details["duration_ms"] = 0
 
     def _get_local_ips(self):
         ips = set()
@@ -37,6 +70,62 @@ class NetworkScanner:
         except Exception:
             pass
         return ips
+
+    def _get_local_ipv4_networks(self):
+        networks = []
+
+        if IS_LINUX:
+            try:
+                output = subprocess.check_output(["ip", "-o", "-f", "inet", "addr", "show"], timeout=6).decode("utf-8", errors="ignore")
+                for line in output.splitlines():
+                    match = re.search(r"inet\s+(\d+\.\d+\.\d+\.\d+/\d+)", line)
+                    if not match:
+                        continue
+                    cidr = match.group(1)
+                    iface_network = ipaddress.ip_interface(cidr).network
+                    if iface_network.is_loopback:
+                        continue
+                    networks.append(iface_network)
+            except Exception as exc:
+                logger.warning(f"Dynamic subnet detection (linux) failed: {exc}")
+        else:
+            try:
+                output = subprocess.check_output(["ipconfig"], timeout=8).decode("utf-8", errors="ignore")
+                ipv4 = None
+                mask = None
+                for raw_line in output.splitlines():
+                    line = raw_line.strip()
+                    ipv4_match = re.search(r"IPv4 Address[^:]*:\s*(\d+\.\d+\.\d+\.\d+)", line, re.IGNORECASE)
+                    if ipv4_match:
+                        ipv4 = ipv4_match.group(1)
+                        continue
+
+                    mask_match = re.search(r"Subnet Mask[^:]*:\s*(\d+\.\d+\.\d+\.\d+)", line, re.IGNORECASE)
+                    if mask_match:
+                        mask = mask_match.group(1)
+
+                    if ipv4 and mask:
+                        try:
+                            iface = ipaddress.IPv4Interface(f"{ipv4}/{mask}")
+                            if not iface.ip.is_loopback:
+                                networks.append(iface.network)
+                        except Exception:
+                            pass
+                        ipv4 = None
+                        mask = None
+            except Exception as exc:
+                logger.warning(f"Dynamic subnet detection (windows) failed: {exc}")
+
+        unique_networks = []
+        seen = set()
+        for network in networks:
+            value = str(network)
+            if value in seen:
+                continue
+            seen.add(value)
+            unique_networks.append(network)
+
+        return unique_networks
 
     def _is_usable_host_ip(self, ip):
         try:
@@ -188,47 +277,67 @@ class NetworkScanner:
 
         return min(100, score)
 
-    def _hosts_from_subnet(self):
+    def _hosts_from_subnet(self, subnet=None, max_hosts=None):
         try:
-            network = ipaddress.ip_network(self._get_effective_scan_subnet(), strict=False)
+            target_subnet = subnet or self._get_effective_scan_subnet()
+            network = ipaddress.ip_network(target_subnet, strict=False)
             hosts = [str(host) for host in network.hosts()]
-            return hosts[:SMART_SCAN_MAX_HOSTS]
+            host_limit = max_hosts if max_hosts is not None else SMART_SCAN_MAX_HOSTS
+            return hosts[:max(1, host_limit)]
         except Exception as exc:
             logger.error(f"Subnet parse failed for {SCAN_SUBNET}: {exc}")
             return []
 
-    def _get_effective_scan_subnet(self):
+    def _get_effective_scan_subnets(self):
         try:
             configured = ipaddress.ip_network(SCAN_SUBNET, strict=False)
         except Exception:
             configured = None
 
-        ipv4_locals = []
-        for candidate in self.local_ips:
-            try:
-                ip_obj = ipaddress.ip_address(candidate)
-                if isinstance(ip_obj, ipaddress.IPv4Address):
-                    ipv4_locals.append(ip_obj)
-            except Exception:
+        selected = []
+        if configured and self.local_ipv4_networks and any(network.overlaps(configured) for network in self.local_ipv4_networks):
+            selected.append(str(configured))
+            selected.extend(str(network) for network in self.local_ipv4_networks)
+        elif self.local_ipv4_networks:
+            selected.extend(str(network) for network in self.local_ipv4_networks)
+            logger.warning(
+                f"Configured SCAN_SUBNET={SCAN_SUBNET} not aligned with active interfaces. Using dynamic subnets {selected}"
+            )
+        else:
+            selected.append(SCAN_SUBNET)
+
+        deduped = []
+        seen = set()
+        for subnet in selected:
+            if subnet in seen:
                 continue
+            seen.add(subnet)
+            deduped.append(subnet)
 
-        if configured and ipv4_locals:
-            if any(ip in configured for ip in ipv4_locals):
-                return SCAN_SUBNET
+        return deduped[:max(1, SMART_SCAN_MAX_SUBNETS)]
 
-        if ipv4_locals:
-            fallback = ipaddress.ip_network(f"{ipv4_locals[0]}/24", strict=False)
-            fallback_subnet = str(fallback)
-            logger.warning(f"Configured SCAN_SUBNET={SCAN_SUBNET} not aligned with local IP. Using {fallback_subnet}")
-            return fallback_subnet
-
-        return SCAN_SUBNET
+    def _get_effective_scan_subnet(self):
+        return self._get_effective_scan_subnets()[0]
 
     def _ping_sweep(self):
         if not SMART_SCAN_PING_SWEEP:
             return []
 
-        hosts = self._hosts_from_subnet()
+        subnets = self._get_effective_scan_subnets()
+        if not subnets:
+            return []
+
+        remaining_budget = max(1, SMART_SCAN_MAX_HOSTS)
+        hosts = []
+        for index, subnet in enumerate(subnets):
+            remaining_subnets = max(1, len(subnets) - index)
+            per_subnet_budget = max(1, remaining_budget // remaining_subnets)
+            subnet_hosts = self._hosts_from_subnet(subnet=subnet, max_hosts=per_subnet_budget)
+            hosts.extend(subnet_hosts)
+            remaining_budget -= len(subnet_hosts)
+            if remaining_budget <= 0:
+                break
+
         if not hosts:
             return []
 
@@ -360,10 +469,14 @@ class NetworkScanner:
         """
         logger.info("Scanning network using nmap...")
         try:
-            effective_subnet = self._get_effective_scan_subnet()
-            cmd = ["nmap", "-sn", "-n", "--max-retries", "1", effective_subnet]
-            output = subprocess.check_output(cmd, timeout=SMART_SCAN_TIMEOUT).decode('utf-8', errors='ignore')
-            return self.parse_nmap_output(output)
+            target_subnets = self._get_effective_scan_subnets()
+            discovered = []
+            timeout_per_subnet = max(8, int(SMART_SCAN_TIMEOUT / max(1, len(target_subnets))))
+            for subnet in target_subnets:
+                cmd = ["nmap", "-sn", "-n", "--max-retries", "1", subnet]
+                output = subprocess.check_output(cmd, timeout=timeout_per_subnet).decode('utf-8', errors='ignore')
+                discovered.extend(self.parse_nmap_output(output))
+            return discovered
         except Exception as e:
             logger.error(f"Nmap scan failed: {e}")
             return self.scan_network_arp()
@@ -437,6 +550,8 @@ class NetworkScanner:
 
     def scan_network_smart(self):
         logger.info("Running SMART network scan (multi-source)...")
+        started_at = time.time()
+        scan_subnets = self._get_effective_scan_subnets()
 
         sources = []
         if IS_LINUX:
@@ -477,6 +592,8 @@ class NetworkScanner:
 
         discovered = list(merged.values())
         logger.info(f"SMART scan discovered {len(discovered)} device(s)")
+        self._record_scan_details("smart", scan_subnets, discovered)
+        self._set_scan_duration(started_at)
         return discovered
 
     def _ping_ip(self, ip):
@@ -593,6 +710,8 @@ class NetworkScanner:
         """
         Discovers new devices and updates the device database.
         """
+        started_at = time.time()
+        scan_subnets = self._get_effective_scan_subnets()
         use_smart = str(scan_mode).lower() == "smart"
         discovered = self.scan_network_smart() if use_smart else (self.scan_network_nmap() if IS_LINUX else self.scan_network_arp())
         
@@ -607,6 +726,8 @@ class NetworkScanner:
 
         self._merge_discovered(discovered)
         self.devices = self._sanitize_devices(self.devices)
+        self._record_scan_details("smart" if use_smart else "standard", scan_subnets, discovered)
+        self._set_scan_duration(started_at)
         
         self.save_devices()
         return self.devices

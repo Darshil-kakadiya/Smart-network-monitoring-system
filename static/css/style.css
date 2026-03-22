@@ -121,6 +121,25 @@ body {
     min-width: 120px;
 }
 
+select.form-control,
+.form-control-select {
+    background-color: #12151d;
+    color: var(--text-main);
+}
+
+select.form-control option,
+select.form-control optgroup,
+.form-control-select option,
+.form-control-select optgroup {
+    background-color: #12151d;
+    color: var(--text-main);
+}
+
+select.form-control:focus,
+.form-control-select:focus {
+    background-color: #12151d;
+}
+
 .action-smart-scan {
     background: rgba(16, 185, 129, 0.12);
     border-color: #10b981;

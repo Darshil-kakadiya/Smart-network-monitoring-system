@@ -20,6 +20,7 @@ An innovative network traffic control system with AI-driven predictions, anomaly
 - **Live Dashboard**: Web-based interface with real-time updates
 - **Traffic Visualization**: Chart.js powered usage graphs
 - **Alert System**: Proactive notifications for critical events
+- **Scan Observability**: Shows last scan mode, scanned subnets, source breakdown, and scan duration
 
 ### Security & Automation
 - **Multi-Mode Operation**: MANUAL, AUTO, and SMART modes for different security levels
@@ -36,6 +37,8 @@ An innovative network traffic control system with AI-driven predictions, anomaly
 ### Improved Scanner
 - Nmap scanning for hostname and detailed info
 - ARP fallback for cross-platform compatibility
+- Dynamic subnet detection from active interface mask (no fixed /24 fallback)
+- Multi-interface scanning (scans all detected active subnets)
 - Persistent device database with JSON storage
 
 ### Better User Experience

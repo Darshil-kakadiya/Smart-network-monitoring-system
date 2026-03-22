@@ -52,6 +52,7 @@ users_db = scanner.devices
 usage_history = {user['ip']: [] for user in users_db}
 last_background_scan_at = 0.0
 scan_lock = threading.Lock()
+scan_in_progress = False
 
 
 def _sync_history_keys(devices):
@@ -70,6 +71,35 @@ def _to_json_safe_float(value, default=0.0):
         return float(value)
     except (TypeError, ValueError):
         return default
+
+
+def _run_background_scan(scan_mode):
+    global users_db, last_background_scan_at, scan_in_progress
+    try:
+        fresh_scanner_devices = scanner.update_device_list(scan_mode=scan_mode)
+        with scan_lock:
+            users_db = fresh_scanner_devices
+            _sync_history_keys(users_db)
+            last_background_scan_at = time.time()
+    except Exception as exc:
+        logger.error(f"Background scan failed ({scan_mode}): {exc}")
+    finally:
+        scan_in_progress = False
+
+
+def _trigger_background_scan(scan_mode, force=False):
+    global scan_in_progress, last_background_scan_at
+
+    now = time.time()
+    if not force and (now - last_background_scan_at) < AUTO_SCAN_INTERVAL:
+        return False
+    if scan_in_progress:
+        return False
+
+    scan_in_progress = True
+    worker = threading.Thread(target=_run_background_scan, args=(scan_mode,), daemon=True)
+    worker.start()
+    return True
 
 
 def _infer_topology(devices):
@@ -165,26 +195,12 @@ def get_status():
     if not is_authenticated():
         return jsonify({"status": "error", "message": "Unauthorized"}), 401
         
-    global users_db, current_mode, last_background_scan_at
+    global users_db, current_mode
     
     # Active Guard Logic (Phase 9)
     if current_mode in ["AUTO", "SMART"]:
-        now = time.time()
-        should_scan = (now - last_background_scan_at) >= AUTO_SCAN_INTERVAL
-        if should_scan and scan_lock.acquire(blocking=False):
-            try:
-                scan_mode = "smart" if current_mode == "SMART" else "standard"
-                fresh_scanner_devices = scanner.update_device_list(scan_mode=scan_mode)
-                for dev in fresh_scanner_devices:
-                    # Auto-block loop (Industry Security)
-                    # If status isn't explicitly ACTIVE/ADMIN etc, and it's a new discovery
-                    if dev.get('role') == 'Guest' and dev.get('status') != 'ACTIVE':
-                        # Treat as UNKNOWN/Potential Intruder in high-security mode
-                        pass
-                users_db = fresh_scanner_devices
-                last_background_scan_at = now
-            finally:
-                scan_lock.release()
+        scan_mode = "smart" if current_mode == "SMART" else "standard"
+        _trigger_background_scan(scan_mode=scan_mode, force=False)
 
     _sync_history_keys(users_db)
 
@@ -221,9 +237,11 @@ def get_status():
         "users": current_usage,
         "history": usage_history,
         "mode": current_mode,
+        "scan_in_progress": scan_in_progress,
         "predictions": predictions,
         "anomalies": anomalies,
         "health": health,
+        "scan": scanner.last_scan_details,
         "topology": _infer_topology(users_db)
     })
 
@@ -257,7 +275,12 @@ def run_scan():
     users_db = scanner.update_device_list(scan_mode=scan_mode)
     _sync_history_keys(users_db)
     log_action("AUTO_SCAN", f"Scan mode={scan_mode} completed. Devices: {len(users_db)}")
-    return jsonify({"status": "success", "scan_mode": scan_mode, "devices": users_db})
+    return jsonify({
+        "status": "success",
+        "scan_mode": scan_mode,
+        "scan": scanner.last_scan_details,
+        "devices": users_db
+    })
 
 
 @app.route('/api/one_click_scan', methods=['POST'])
@@ -269,7 +292,12 @@ def one_click_scan():
     users_db = scanner.update_device_list(scan_mode='smart')
     _sync_history_keys(users_db)
     log_action("ONE_CLICK_SMART_SCAN", f"One-click smart scan completed. Devices: {len(users_db)}")
-    return jsonify({"status": "success", "scan_mode": "smart", "devices": users_db})
+    return jsonify({
+        "status": "success",
+        "scan_mode": "smart",
+        "scan": scanner.last_scan_details,
+        "devices": users_db
+    })
 
 
 @app.route('/api/manual_ip', methods=['POST'])
@@ -397,6 +425,9 @@ def set_mode():
     new_mode = data.get('mode')
     if new_mode in ["MANUAL", "AUTO", "SMART"]:
         current_mode = new_mode
+        if new_mode in ["AUTO", "SMART"]:
+            scan_mode = "smart" if new_mode == "SMART" else "standard"
+            _trigger_background_scan(scan_mode=scan_mode, force=True)
         log_action("SYSTEM_MODE", f"Switched to {new_mode}")
         return jsonify({"status": "success", "mode": current_mode})
     return jsonify({"status": "error", "message": "Invalid mode"}), 400
