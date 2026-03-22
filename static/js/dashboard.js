@@ -52,6 +52,9 @@ function updateModeButtons(mode) {
     if (mode === 'MANUAL') {
         const btn = document.getElementById('btn-manual');
         if (btn) btn.classList.add('active');
+    } else if (mode === 'SMART') {
+        const btn = document.getElementById('btn-smart');
+        if (btn) btn.classList.add('active');
     } else {
         const btn = document.getElementById('btn-auto');
         if (btn) btn.classList.add('active');
@@ -71,16 +74,19 @@ async function setMode(mode) {
     }
 }
 
-async function scanNetwork() {
-    showToast("Scanning network... please wait.");
-    const response = await fetch('/api/scan', {
+async function scanNetwork(scanMode = 'smart') {
+    showToast(`Scanning network (${scanMode})... please wait.`);
+
+    const endpoint = scanMode === 'smart' ? '/api/one_click_scan' : '/api/scan';
+    const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({})
+        body: JSON.stringify({ scan_mode: scanMode })
     });
     const data = await response.json();
     if (data.status === 'success') {
-        showToast(`Scan complete! Found ${data.devices.length} devices.`);
+        const mode = (data.scan_mode || scanMode).toUpperCase();
+        showToast(`${mode} scan complete! Found ${data.devices.length} devices.`);
         updateDashboard();
     } else {
         showToast(data.message || 'Scan failed');
@@ -258,6 +264,7 @@ function renderUserCards(users, predictions = {}) {
                     <span class="badge badge-${colorClass}">${user.role}</span>
                     <p style="font-weight: 700; margin-top: 5px;">${user.name} ${isBlocked ? '🛑' : ''}</p>
                     <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Type: ${user.device_type || 'Unknown'}</p>
+                    <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Link: ${user.connection_type || 'Unknown'} • Accuracy: ${(user.detection_confidence || 0)}%</p>
                 </div>
                 <div style="text-align: right;">
                     <span class="ip-label" style="display: block;">${user.ip}</span>
@@ -328,7 +335,7 @@ async function viewDeviceDetails(ip, silent = false) {
                 <div class="card" style="padding: 1rem; border-radius: 12px;">
                     <div style="font-size: 0.75rem; color: var(--text-muted);">Device</div>
                     <div style="font-size: 1rem; font-weight: 700;">${device.name}</div>
-                    <div style="font-size: 0.82rem; color: var(--text-muted);">${device.ip} • ${device.device_type}</div>
+                    <div style="font-size: 0.82rem; color: var(--text-muted);">${device.ip} • ${device.device_type} • ${device.connection_type || 'Unknown'}</div>
                 </div>
                 <div class="card" style="padding: 1rem; border-radius: 12px;">
                     <div style="font-size: 0.75rem; color: var(--text-muted);">Current Usage</div>
@@ -343,7 +350,7 @@ async function viewDeviceDetails(ip, silent = false) {
                 <div class="card" style="padding: 1rem; border-radius: 12px;">
                     <div style="font-size: 0.75rem; color: var(--text-muted);">Predicted Next</div>
                     <div style="font-size: 1.15rem; font-weight: 700;">${split.predicted_next_mbps} Mbps</div>
-                    <div style="font-size: 0.82rem; color: var(--text-muted);">Role: ${device.role} • Status: ${device.status}</div>
+                    <div style="font-size: 0.82rem; color: var(--text-muted);">Role: ${device.role} • Status: ${device.status} • Accuracy: ${device.detection_confidence || 0}%</div>
                 </div>
             </div>
         `;

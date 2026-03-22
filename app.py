@@ -46,7 +46,7 @@ app = Flask(__name__)
 app.secret_key = SECRET_KEY
 
 # Application State
-current_mode = SYSTEM_MODE
+current_mode = SYSTEM_MODE if SYSTEM_MODE in ["MANUAL", "AUTO", "SMART"] else "MANUAL"
 users_db = scanner.devices
 usage_history = {user['ip']: [] for user in users_db}
 
@@ -154,8 +154,9 @@ def get_status():
     global users_db, current_mode
     
     # Active Guard Logic (Phase 9)
-    if current_mode == "AUTO":
-        fresh_scanner_devices = scanner.update_device_list()
+    if current_mode in ["AUTO", "SMART"]:
+        scan_mode = "smart" if current_mode == "SMART" else "standard"
+        fresh_scanner_devices = scanner.update_device_list(scan_mode=scan_mode)
         for dev in fresh_scanner_devices:
             # Auto-block loop (Industry Security)
             # If status isn't explicitly ACTIVE/ADMIN etc, and it's a new discovery
@@ -173,6 +174,9 @@ def get_status():
         matched = device_by_ip.get(usage_item.get('ip'), {})
         usage_item['device_type'] = matched.get('device_type', 'Unknown')
         usage_item['name'] = matched.get('name', usage_item.get('name', 'Unknown'))
+        usage_item['connection_type'] = matched.get('connection_type', 'Unknown')
+        usage_item['detection_confidence'] = matched.get('detection_confidence', 0)
+        usage_item['mac'] = matched.get('mac', usage_item.get('mac', '00:00:00:00:00:00'))
     current_time = time.strftime("%H:%M:%S")
     
     predictions = {}
@@ -211,6 +215,8 @@ def run_scan():
     global users_db
     data = request.get_json(silent=True) or {}
     manual_ip = (data.get('manual_ip') or '').strip()
+    requested_scan_mode = str(data.get('scan_mode', 'smart')).strip().lower()
+    scan_mode = 'smart' if requested_scan_mode not in ['standard', 'smart'] else requested_scan_mode
 
     if manual_ip:
         result = scanner.add_or_update_manual_ip(manual_ip)
@@ -227,10 +233,22 @@ def run_scan():
             "devices": users_db
         })
 
-    users_db = scanner.update_device_list()
+    users_db = scanner.update_device_list(scan_mode=scan_mode)
     _sync_history_keys(users_db)
-    log_action("AUTO_SCAN", f"Auto scan completed. Devices: {len(users_db)}")
-    return jsonify({"status": "success", "devices": users_db})
+    log_action("AUTO_SCAN", f"Scan mode={scan_mode} completed. Devices: {len(users_db)}")
+    return jsonify({"status": "success", "scan_mode": scan_mode, "devices": users_db})
+
+
+@app.route('/api/one_click_scan', methods=['POST'])
+def one_click_scan():
+    if not is_authenticated():
+        return jsonify({"status": "error", "message": "Unauthorized"}), 401
+
+    global users_db
+    users_db = scanner.update_device_list(scan_mode='smart')
+    _sync_history_keys(users_db)
+    log_action("ONE_CLICK_SMART_SCAN", f"One-click smart scan completed. Devices: {len(users_db)}")
+    return jsonify({"status": "success", "scan_mode": "smart", "devices": users_db})
 
 
 @app.route('/api/manual_ip', methods=['POST'])
@@ -326,6 +344,8 @@ def get_device_details(ip):
             "name": target_device.get('name', 'Unknown'),
             "mac": target_device.get('mac', '00:00:00:00:00:00'),
             "device_type": target_device.get('device_type', 'Unknown'),
+            "connection_type": target_device.get('connection_type', 'Unknown'),
+            "detection_confidence": target_device.get('detection_confidence', 0),
             "role": target_device.get('role', 'Guest'),
             "status": target_device.get('status', 'ACTIVE')
         },
@@ -354,7 +374,7 @@ def set_mode():
     global current_mode
     data = request.json
     new_mode = data.get('mode')
-    if new_mode in ["MANUAL", "AUTO"]:
+    if new_mode in ["MANUAL", "AUTO", "SMART"]:
         current_mode = new_mode
         log_action("SYSTEM_MODE", f"Switched to {new_mode}")
         return jsonify({"status": "success", "mode": current_mode})

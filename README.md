@@ -11,6 +11,8 @@ An innovative network traffic control system with AI-driven predictions, anomaly
 
 ### Advanced Network Management
 - **Intelligent Scanning**: Nmap integration for detailed device discovery (Linux)
+- **One-Click SMART Scan**: Hybrid scan (nmap/arp/ip-neigh/ping sweep) for better real-world discovery
+- **Wired/Wireless Labeling**: Detects likely connection type with confidence scoring
 - **Automated Blocking**: Auto-blocks devices with anomalous behavior in AUTO mode
 - **Priority-Based Bandwidth Allocation**: Role-based limits (Admin, Teacher, Student, Guest)
 
@@ -20,7 +22,7 @@ An innovative network traffic control system with AI-driven predictions, anomaly
 - **Alert System**: Proactive notifications for critical events
 
 ### Security & Automation
-- **Multi-Mode Operation**: MANUAL and AUTO modes for different security levels
+- **Multi-Mode Operation**: MANUAL, AUTO, and SMART modes for different security levels
 - **Traffic Control**: Linux tc integration for precise bandwidth shaping
 - **Audit Logging**: Comprehensive action logging
 
@@ -72,7 +74,7 @@ Edit `config.py` for:
 ## 📊 Usage
 
 1. Login with admin credentials
-2. Switch between MANUAL/AUTO modes
+2. Switch between MANUAL/AUTO/SMART modes
 3. Monitor device usage and predictions
 4. Set priorities and block/unblock devices
 5. Generate reports

@@ -4,8 +4,17 @@ import json
 import os
 import socket
 import ipaddress
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from logger import logger
-from config import DEVICES_FILE, SCAN_SUBNET, IS_LINUX
+from config import (
+    DEVICES_FILE,
+    SCAN_SUBNET,
+    IS_LINUX,
+    SMART_SCAN_TIMEOUT,
+    SMART_SCAN_MAX_HOSTS,
+    SMART_SCAN_PING_SWEEP,
+    SMART_SCAN_INCLUDE_HOSTNAME_RESOLVE,
+)
 
 class NetworkScanner:
     def __init__(self):
@@ -50,6 +59,11 @@ class NetworkScanner:
             return False
         return True
 
+    def _normalize_mac(self, mac):
+        if not mac:
+            return "00:00:00:00:00:00"
+        return mac.replace('-', ':').upper()
+
     def _resolve_hostname(self, ip):
         try:
             name, _, _ = socket.gethostbyaddr(ip)
@@ -84,6 +98,15 @@ class NetworkScanner:
                 continue
             if not self._is_usable_host_mac(mac):
                 normalized["mac"] = "00:00:00:00:00:00"
+
+            if normalized.get("detection_confidence") is None:
+                normalized["detection_confidence"] = self._calculate_confidence(normalized)
+            if not normalized.get("connection_type"):
+                normalized["connection_type"] = self._infer_connection_type(
+                    normalized.get("name"),
+                    normalized.get("mac"),
+                    normalized.get("scan_sources", ["legacy"])
+                )
 
             if ip in seen_ips:
                 continue
@@ -123,6 +146,129 @@ class NetworkScanner:
             return "PC"
         return "Unknown"
 
+    def _infer_connection_type(self, name, mac, scan_sources=None):
+        name_lower = (name or "").lower()
+        source_text = ' '.join(scan_sources or []).lower()
+        mac_prefix = (mac or "")[:8].upper()
+
+        wireless_name_tokens = [
+            "iphone", "android", "mobile", "phone", "pixel", "redmi", "samsung", "oneplus", "xiaomi",
+            "wifi", "wlan", "tablet", "ipad", "watch"
+        ]
+        wired_name_tokens = ["desktop", "pc", "workstation", "server", "lan", "ethernet", "printer", "nas"]
+
+        known_wireless_ouis = {
+            "D8:96:95", "F4:F5:D8", "FC:FB:FB", "A4:C3:F0", "C8:FF:77", "60:AB:67"
+        }
+
+        if any(token in name_lower for token in wireless_name_tokens):
+            return "Wireless"
+        if any(token in name_lower for token in wired_name_tokens):
+            return "Wired"
+        if mac_prefix in known_wireless_ouis:
+            return "Wireless"
+        if "nmap" in source_text and "arp" in source_text:
+            return "Wired/Wireless"
+        return "Unknown"
+
+    def _calculate_confidence(self, device):
+        score = 0
+        if device.get("ip") and self._is_usable_host_ip(device.get("ip")):
+            score += 35
+        if device.get("mac") and device.get("mac") != "00:00:00:00:00:00":
+            score += 25
+        if device.get("name") and device.get("name") != "Unknown Device":
+            score += 15
+        if device.get("status") == "ACTIVE":
+            score += 10
+
+        source_count = len(set(device.get("scan_sources", [])))
+        if source_count >= 2:
+            score += 15
+
+        return min(100, score)
+
+    def _hosts_from_subnet(self):
+        try:
+            network = ipaddress.ip_network(SCAN_SUBNET, strict=False)
+            hosts = [str(host) for host in network.hosts()]
+            return hosts[:SMART_SCAN_MAX_HOSTS]
+        except Exception as exc:
+            logger.error(f"Subnet parse failed for {SCAN_SUBNET}: {exc}")
+            return []
+
+    def _ping_sweep(self):
+        if not SMART_SCAN_PING_SWEEP:
+            return []
+
+        hosts = self._hosts_from_subnet()
+        if not hosts:
+            return []
+
+        discovered = []
+        with ThreadPoolExecutor(max_workers=64) as executor:
+            future_map = {executor.submit(self._ping_ip, host): host for host in hosts}
+            for future in as_completed(future_map):
+                ip = future_map[future]
+                try:
+                    if future.result():
+                        discovered.append({
+                            "ip": ip,
+                            "name": self._resolve_hostname(ip) if SMART_SCAN_INCLUDE_HOSTNAME_RESOLVE else "Unknown Device",
+                            "role": "Guest",
+                            "bandwidth_limit": 5,
+                            "status": "ACTIVE",
+                            "scan_sources": ["ping-sweep"]
+                        })
+                except Exception:
+                    continue
+        return discovered
+
+    def _scan_network_neighbors(self):
+        if IS_LINUX:
+            try:
+                output = subprocess.check_output(["ip", "neigh", "show"], timeout=8).decode('utf-8', errors='ignore')
+                return self.parse_ip_neigh_output(output)
+            except Exception as exc:
+                logger.warning(f"ip neigh scan failed: {exc}")
+                return []
+
+        try:
+            output = subprocess.check_output(['arp', '-a']).decode('utf-8', errors='ignore')
+            return self.parse_arp_output(output, source="arp")
+        except Exception as exc:
+            logger.warning(f"ARP neighbor scan failed: {exc}")
+            return []
+
+    def parse_ip_neigh_output(self, output):
+        devices = []
+        lines = output.split('\n')
+        for line in lines:
+            ip_match = re.search(r'(\d{1,3}(?:\.\d{1,3}){3})', line)
+            mac_match = re.search(r'([0-9a-fA-F]{2}(?::[0-9a-fA-F]{2}){5})', line)
+            if not ip_match:
+                continue
+
+            ip = ip_match.group(1)
+            if not self._is_usable_host_ip(ip):
+                continue
+
+            mac = self._normalize_mac(mac_match.group(1)) if mac_match else "00:00:00:00:00:00"
+            if mac != "00:00:00:00:00:00" and not self._is_usable_host_mac(mac):
+                continue
+
+            devices.append({
+                "ip": ip,
+                "mac": mac,
+                "name": self._resolve_hostname(ip),
+                "role": "Guest",
+                "bandwidth_limit": 5,
+                "status": "ACTIVE",
+                "scan_sources": ["ip-neigh"]
+            })
+
+        return devices
+
     def _normalize_device(self, device):
         normalized = {
             "ip": device.get("ip", ""),
@@ -130,7 +276,8 @@ class NetworkScanner:
             "name": device.get("name", "Unknown Device"),
             "role": device.get("role", "Guest"),
             "bandwidth_limit": device.get("bandwidth_limit", 5),
-            "status": device.get("status", "ACTIVE")
+            "status": device.get("status", "ACTIVE"),
+            "scan_sources": device.get("scan_sources", ["legacy"])
         }
         if normalized["name"] in ["Unknown Device", ""] and normalized["ip"]:
             resolved = self._resolve_hostname(normalized["ip"])
@@ -141,6 +288,13 @@ class NetworkScanner:
             normalized["name"] = f"{self.local_hostname} (This PC)"
 
         normalized["device_type"] = device.get("device_type") or self._infer_device_type(normalized["name"], normalized["ip"])
+        normalized["mac"] = self._normalize_mac(normalized["mac"])
+        normalized["connection_type"] = device.get("connection_type") or self._infer_connection_type(
+            normalized["name"], normalized["mac"], normalized.get("scan_sources", [])
+        )
+        normalized["detection_confidence"] = device.get("detection_confidence")
+        if normalized["detection_confidence"] is None:
+            normalized["detection_confidence"] = self._calculate_confidence(normalized)
         return normalized
 
     def _merge_discovered(self, discovered):
@@ -157,6 +311,14 @@ class NetworkScanner:
                     value = normalized.get(key)
                     if value and value not in ["Unknown Device", "00:00:00:00:00:00", "Unknown"]:
                         existing[key] = value
+                existing_sources = set(existing.get("scan_sources", []))
+                discovered_sources = set(normalized.get("scan_sources", []))
+                existing["scan_sources"] = sorted(existing_sources.union(discovered_sources))
+                existing["connection_type"] = normalized.get("connection_type", existing.get("connection_type", "Unknown"))
+                existing["detection_confidence"] = max(
+                    existing.get("detection_confidence", 0),
+                    normalized.get("detection_confidence", 0)
+                )
                 existing.setdefault("role", "Guest")
                 existing.setdefault("bandwidth_limit", 5)
                 existing.setdefault("status", "ACTIVE")
@@ -171,8 +333,8 @@ class NetworkScanner:
         """
         logger.info("Scanning network using nmap...")
         try:
-            cmd = ["nmap", "-sn", SCAN_SUBNET]
-            output = subprocess.check_output(cmd, timeout=30).decode('utf-8', errors='ignore')
+            cmd = ["nmap", "-sn", "-n", "--max-retries", "1", SCAN_SUBNET]
+            output = subprocess.check_output(cmd, timeout=SMART_SCAN_TIMEOUT).decode('utf-8', errors='ignore')
             return self.parse_nmap_output(output)
         except Exception as e:
             logger.error(f"Nmap scan failed: {e}")
@@ -186,7 +348,7 @@ class NetworkScanner:
         logger.info("Scanning network using ARP...")
         try:
             output = subprocess.check_output(['arp', '-a']).decode('utf-8', errors='ignore')
-            return self.parse_arp_output(output)
+            return self.parse_arp_output(output, source="arp")
         except Exception as e:
             logger.error(f"ARP scan failed: {e}")
             return []
@@ -206,7 +368,8 @@ class NetworkScanner:
                     "name": hostname_match.group(1) if hostname_match else "Unknown Device",
                     "role": "Guest",
                     "bandwidth_limit": 5,
-                    "status": "ACTIVE"
+                    "status": "ACTIVE",
+                    "scan_sources": ["nmap"]
                 }
             elif 'MAC Address:' in line:
                 mac_match = re.search(r'([0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2}[:-][0-9a-fA-F]{2})', line)
@@ -216,7 +379,7 @@ class NetworkScanner:
             devices.append(current_device)
         return devices
 
-    def parse_arp_output(self, output):
+    def parse_arp_output(self, output, source="arp"):
         devices = []
         # Regex for IP and MAC (generic enough for both OS)
         ip_pattern = r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'
@@ -239,9 +402,54 @@ class NetworkScanner:
                     "name": self._resolve_hostname(ip),
                     "role": "Guest",
                     "bandwidth_limit": 5,
-                    "status": "ACTIVE"
+                    "status": "ACTIVE",
+                    "scan_sources": [source]
                 })
         return devices
+
+    def scan_network_smart(self):
+        logger.info("Running SMART network scan (multi-source)...")
+
+        sources = []
+        if IS_LINUX:
+            sources.append(self.scan_network_nmap())
+        else:
+            sources.append(self.scan_network_arp())
+
+        sources.append(self._scan_network_neighbors())
+        sources.append(self._ping_sweep())
+
+        combined = []
+        for source_devices in sources:
+            combined.extend(source_devices or [])
+
+        merged = {}
+        for entry in combined:
+            normalized = self._normalize_device(entry)
+            ip = normalized.get("ip")
+            if not ip or not self._is_usable_host_ip(ip):
+                continue
+
+            if ip not in merged:
+                merged[ip] = normalized
+                continue
+
+            existing = merged[ip]
+
+            if normalized.get("mac") and normalized.get("mac") != "00:00:00:00:00:00":
+                existing["mac"] = normalized.get("mac")
+            if normalized.get("name") and normalized.get("name") != "Unknown Device":
+                existing["name"] = normalized.get("name")
+
+            existing["scan_sources"] = sorted(set(existing.get("scan_sources", [])).union(set(normalized.get("scan_sources", []))))
+            existing["connection_type"] = self._infer_connection_type(
+                existing.get("name"), existing.get("mac"), existing.get("scan_sources", [])
+            )
+            existing["detection_confidence"] = self._calculate_confidence(existing)
+
+        discovered = list(merged.values())
+        logger.info(f"SMART scan discovered {len(discovered)} device(s)")
+        return discovered
 
     def _ping_ip(self, ip):
         try:
@@ -353,19 +561,20 @@ class NetworkScanner:
             "message": "Manual user IP added"
         }
 
-    def update_device_list(self):
+    def update_device_list(self, scan_mode="standard"):
         """
         Discovers new devices and updates the device database.
         """
-        discovered = self.scan_network_nmap() if IS_LINUX else self.scan_network_arp()
+        use_smart = str(scan_mode).lower() == "smart"
+        discovered = self.scan_network_smart() if use_smart else (self.scan_network_nmap() if IS_LINUX else self.scan_network_arp())
         
         # Simulation for Demo (if no devices found)
         if not discovered and not IS_LINUX:
             discovered = [
-                {"ip": "192.168.1.10", "mac": "AA:BB:CC:DD:EE:01", "name": "Admin-PC", "role": "Admin", "bandwidth_limit": 100, "device_type": "PC", "status": "ACTIVE"},
-                {"ip": "192.168.1.15", "mac": "AA:BB:CC:DD:EE:02", "name": "Teacher-Laptop", "role": "Teacher", "bandwidth_limit": 50, "device_type": "Laptop", "status": "ACTIVE"},
-                {"ip": "192.168.1.22", "mac": "AA:BB:CC:DD:EE:03", "name": "Student-Phone", "role": "Student", "bandwidth_limit": 10, "device_type": "Mobile", "status": "ACTIVE"},
-                {"ip": "192.168.1.50", "mac": "AA:BB:CC:DD:EE:04", "name": "Guest-Device", "role": "Guest", "bandwidth_limit": 5, "device_type": "Unknown", "status": "ACTIVE"},
+                {"ip": "192.168.1.10", "mac": "AA:BB:CC:DD:EE:01", "name": "Admin-PC", "role": "Admin", "bandwidth_limit": 100, "device_type": "PC", "status": "ACTIVE", "scan_sources": ["simulation"]},
+                {"ip": "192.168.1.15", "mac": "AA:BB:CC:DD:EE:02", "name": "Teacher-Laptop", "role": "Teacher", "bandwidth_limit": 50, "device_type": "Laptop", "status": "ACTIVE", "scan_sources": ["simulation"]},
+                {"ip": "192.168.1.22", "mac": "AA:BB:CC:DD:EE:03", "name": "Student-Phone", "role": "Student", "bandwidth_limit": 10, "device_type": "Mobile", "status": "ACTIVE", "scan_sources": ["simulation"]},
+                {"ip": "192.168.1.50", "mac": "AA:BB:CC:DD:EE:04", "name": "Guest-Device", "role": "Guest", "bandwidth_limit": 5, "device_type": "Unknown", "status": "ACTIVE", "scan_sources": ["simulation"]},
             ]
 
         self._merge_discovered(discovered)

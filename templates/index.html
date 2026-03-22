@@ -28,8 +28,9 @@
                     <div id="mode-controls" class="mode-toggle-group">
                         <button onclick="setMode('MANUAL')" id="btn-manual" class="mode-btn active">MANUAL</button>
                         <button onclick="setMode('AUTO')" id="btn-auto" class="mode-btn">AUTO-SCAN</button>
+                        <button onclick="setMode('SMART')" id="btn-smart" class="mode-btn">SMART</button>
                     </div>
-                    <button onclick="scanNetwork()" class="prio-btn" style="background: rgba(16, 185, 129, 0.12); border-color: #10b981;">🔎 SCAN NOW</button>
+                    <button onclick="scanNetwork('smart')" class="prio-btn" style="background: rgba(16, 185, 129, 0.12); border-color: #10b981;">🔎 ONE-CLICK SMART SCAN</button>
                     <div style="display: flex; align-items: center; gap: 0.5rem;">
                         <input id="manual-ip" type="text" autocomplete="off" placeholder="Enter IP (e.g. 192.168.1.20)" title="Type an IPv4/IPv6 address and press Enter or CHECK IP" style="padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-main); min-width: 220px;">
                         <button onclick="checkManualIP()" class="prio-btn">CHECK IP</button>
