@@ -106,3 +106,4 @@ Edit `config.py` for:
 
 This project demonstrates modern network management with AI, making it more effective for educational and enterprise environments.</content>
 <parameter name="filePath">d:\project Cn\README.md"# Smart-network-monitoring-system" 
+"# Smart-network-monitoring-system" 
