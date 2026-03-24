@@ -105,4 +105,4 @@ Edit `config.py` for:
 - Multi-admin support
 
 This project demonstrates modern network management with AI, making it more effective for educational and enterprise environments.</content>
-<parameter name="filePath">d:\project Cn\README.md
+<parameter name="filePath">d:\project Cn\README.md"# Smart-network-monitoring-system" 

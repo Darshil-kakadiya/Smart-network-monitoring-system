@@ -3,92 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Bandwidth Management System</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Real-Time Hotspot Monitor</title>
+    <link rel="stylesheet" href="/static/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="topbar">
-                <div class="topbar-brand">
-                    <h1>SmartNet <span class="brand-sub">AI-POWERED</span></h1>
-                    <p class="brand-status">
-                        <span class="live-indicator"></span> Real-time Network Intelligence
-                    </p>
-                </div>
-                <div class="topbar-controls">
-                    <div id="health-score-container" class="health-panel">
-                        <p class="health-value" id="health-score">100</p>
-                        <p class="health-label">Health Score</p>
-                    </div>
-                    <div id="mode-controls" class="mode-toggle-group">
-                        <button onclick="setMode('MANUAL')" id="btn-manual" class="mode-btn active">MANUAL</button>
-                        <button onclick="setMode('AUTO')" id="btn-auto" class="mode-btn">AUTO-SCAN</button>
-                        <button onclick="setMode('SMART')" id="btn-smart" class="mode-btn">SMART</button>
-                    </div>
-                    <button onclick="scanNetwork('smart')" class="prio-btn action-smart-scan">🔎 ONE-CLICK SMART SCAN</button>
-                    <div class="control-row">
-                        <input id="manual-ip" type="text" autocomplete="off" placeholder="Enter IP (e.g. 192.168.1.20)" title="Type an IPv4/IPv6 address and press Enter or CHECK IP" class="form-control form-control-wide">
-                        <button onclick="checkManualIP()" class="prio-btn">CHECK IP</button>
-                    </div>
-                    <div class="control-row">
-                        <input id="manual-user-ip" type="text" autocomplete="off" placeholder="User IP" class="form-control form-control-sm">
-                        <input id="manual-user-name" type="text" autocomplete="off" placeholder="User Name" class="form-control form-control-md">
-                        <select id="manual-user-role" class="form-control form-control-select">
-                            <option>Guest</option>
-                            <option>Student</option>
-                            <option>Teacher</option>
-                            <option>Admin</option>
-                        </select>
-                        <button onclick="addManualUserIP()" class="prio-btn">ADD USER IP</button>
-                    </div>
-                    <div class="control-row action-row">
-                        <button onclick="cleanupUnnecessaryIPs()" class="prio-btn action-danger">🧹 CLEAN IPs</button>
-                        <button onclick="generateReport()" class="prio-btn action-primary-soft">📊 REPORT</button>
-                    </div>
-                    <div id="global-stats" class="stats-panel">
-                        <p class="stats-value" id="total-usage">0.00 Mbps</p>
-                        <p class="stats-label">Current Network Load</p>
-                    </div>
-                    <a href="/logout" class="logout-btn">Logout</a>
-                </div>
-            </div>
+            <h1>Real-Time Hotspot Monitor</h1>
+            <div id="status">Status: <span>Connecting...</span></div>
         </header>
 
-        <div id="alert-container" class="alert-system-panel">
-            <div class="alert-header">
-                <span class="pulse-red"></span> SYSTEM ALERTS
-            </div>
-            <div id="alert-list">
-                <!-- Alerts will appear here -->
-                <div class="alert-item info">System monitoring active on {{ os_type }}</div>
-            </div>
-        </div>
+        <main>
+            <section class="top-user-card">
+                <h2>Top Data User</h2>
+                <div id="top-user" class="highlight">
+                    <p>Calculating...</p>
+                </div>
+            </section>
 
-        <div class="status-grid" id="user-grid">
-            <!-- User cards will be injected here -->
-        </div>
+            <section class="chart-container">
+                <h2>Live Bandwidth Usage</h2>
+                <div class="canvas-wrapper" style="position: relative; height: 300px;">
+                    <canvas id="usageChart"></canvas>
+                </div>
+            </section>
 
-        <div class="chart-container chart-no-top-gap" id="device-details-panel">
-            <h2 class="section-title">Selected Device Network Division</h2>
-            <div id="device-details-content" class="section-muted">Click any device card to view detailed network division.</div>
-        </div>
-
-        <div class="chart-container">
-            <h2 class="section-title">Detected Network Topology</h2>
-            <div id="topology-content" class="section-muted">Topology data is loading...</div>
-        </div>
-
-        <div class="chart-container">
-            <h2 class="section-title section-title-lg">Detailed Traffic Analysis</h2>
-            <canvas id="trafficChart" height="100"></canvas>
-        </div>
+            <section class="devices-list">
+                <h2>Connected Devices</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IP Address</th>
+                            <th>MAC Address</th>
+                            <th>Device Name</th>
+                            <th>Data Used</th>
+                        </tr>
+                    </thead>
+                    <tbody id="devices-table-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
     </div>
-
-    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    
+    <script src="/static/js/dashboard.js"></script>
 </body>
 </html>
