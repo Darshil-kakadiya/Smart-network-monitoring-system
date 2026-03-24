@@ -1,110 +1,50 @@
-# SmartNet AI-Powered Bandwidth Management System
+# Real-Time Hotspot Monitor 🚀
 
-An innovative network traffic control system with AI-driven predictions, anomaly detection, and automated security features.
+A highly performant, real-time hotspot monitoring and device detection system built with Python, FastAPI, Scapy, and Chart.js.
 
-## 🚀 Key Features
+## Features
+- **Auto Device Detection**: Automatically scans your Wi-Fi/Mobile Hotspot subnet (default `192.168.43.1/24`) to detect connected devices using ARP broadcasting.
+- **Hostname Resolution**: Resolves IP addresses into their registered Hostnames using NetBIOS/DNS.
+- **Real-Time Bandwidth Tracking**: Utilizes `scapy` packet sniffing to intercept and calculate the cumulative data usage (in bytes) of each IP Address.
+- **FastAPI Backend**: A lightweight and exceptionally fast REST API serving the device and usage data asynchronously.
+- **Dynamic Dashboard**: A beautiful Dark-Mode HTML/CSS/JS frontend showcasing live devices, highlighting the top data consumer, and tracking live data on an interactive `Chart.js` graph.
+- **Smart Alerting**: Logs any connected, disconnected, or newly joined "Unknown" devices to the console in real-time.
 
-### AI & Machine Learning
-- **Predictive Analytics**: Uses linear regression models to forecast bandwidth usage
-- **Anomaly Detection**: Identifies unusual network activity using statistical analysis
-- **Smart Health Scoring**: Network health score considers usage patterns and anomalies
+## Project Structure
+```text
+project/
+├── main.py              # Orchestrator tying all modules together + Alerts
+├── api.py               # FastAPI backend routing and static serving
+├── monitor.py           # Scapy packet interception & byte counting
+├── scanner.py           # Subnet ARP scanning logic
+├── templates/
+│   └── index.html       # The Dashboard UI Layout
+└── static/
+    ├── css/style.css    # Premium dark-mode UI styling
+    └── js/dashboard.js  # Frontend fetching logic & Chart.js rendering
+```
 
-### Advanced Network Management
-- **Intelligent Scanning**: Nmap integration for detailed device discovery (Linux)
-- **One-Click SMART Scan**: Hybrid scan (nmap/arp/ip-neigh/ping sweep) for better real-world discovery
-- **Hotspot-Only Device Filtering**: Shows only devices within the active hotspot/wireless subnet
-- **Wired/Wireless Labeling**: Detects likely connection type with confidence scoring
-- **Automated Blocking**: Auto-blocks devices with anomalous behavior in AUTO mode
-- **Priority-Based Bandwidth Allocation**: Role-based limits (Admin, Teacher, Student, Guest)
+## Installation
+Ensure you have Python 3.8+ installed.
 
-### Real-Time Monitoring
-- **Live Dashboard**: Web-based interface with real-time updates
-- **Traffic Visualization**: Chart.js powered usage graphs
-- **Alert System**: Proactive notifications for critical events
-- **Scan Observability**: Shows last scan mode, scanned subnets, source breakdown, and scan duration
+```bash
+pip install fastapi uvicorn scapy
+```
+*Note for Windows users*: Packet sniffing requires an underlying packet capture library. Ensure you have [Npcap](https://npcap.com/) or WinPcap installed.
 
-### Security & Automation
-- **Multi-Mode Operation**: MANUAL, AUTO, and SMART modes for different security levels
-- **Traffic Control**: Linux tc integration for precise bandwidth shaping
-- **Audit Logging**: Comprehensive action logging
+## Running the Application
+The app must be run with **Administrator** or **Root** privileges to successfully monitor packets.
 
-## 🛠️ Technical Improvements
+1. Open an elevated terminal (Run as Administrator or use `sudo`).
+2. Navigate to the project directory.
+3. Start the application:
+```bash
+python main.py
+```
+*(On Linux, use `sudo python3 main.py`)*
 
-### Enhanced AI Engine
-- Machine learning models trained per device IP
-- Fallback to trend analysis when ML unavailable
-- Anomaly detection with z-score thresholding
+## Accessing the Dashboard
+Once the system reports `Starting backend API on 0.0.0.0:8000`, open your web browser and go to:
+**[http://localhost:8000](http://localhost:8000)**
 
-### Improved Scanner
-- Nmap scanning for hostname and detailed info
-- ARP fallback for cross-platform compatibility
-- Dynamic subnet detection from active interface mask (no fixed /24 fallback)
-- Multi-interface scanning (scans all detected active subnets)
-- Persistent device database with JSON storage
-
-### Better User Experience
-- Real-time polling for live updates
-- Anomaly alerts in dashboard
-- Health score visualization
-
-### Code Quality
-- Error handling and graceful degradation
-- Cross-platform support (Linux primary, Windows simulation)
-- Modular architecture for easy extension
-
-## 📋 Requirements
-
-- Python 3.7+
-- Flask
-- scikit-learn (optional, for ML features)
-- Linux: nmap, tc, iptables (for full functionality)
-- Windows: ARP scanning simulation
-
-## 🚀 Installation
-
-1. Clone the repository
-2. Install dependencies: `pip install flask scikit-learn`
-3. Run: `python app.py`
-4. Access: http://localhost:5000
-
-## 🔧 Configuration
-
-Edit `config.py` for:
-- Network interface settings
-- Scan subnets
-- Authentication credentials
-- AI parameters
-
-## 📊 Usage
-
-1. Login with admin credentials
-2. Switch between MANUAL/AUTO/SMART modes
-3. Monitor device usage and predictions
-4. Set priorities and block/unblock devices
-5. Generate reports
-
-## 📄 Reports
-
-- The dashboard REPORT button now generates a **PDF** report.
-- Reports include only currently connected hotspot devices with device names, summary, and usage samples.
-- Generated PDFs are downloadable directly from the UI.
-
-## 🔒 Security Features
-
-- Root privilege checks on Linux
-- Session-based authentication
-- Automatic anomaly blocking in AUTO mode
-- Comprehensive logging
-
-## 📈 Future Enhancements
-
-- Real-time WebSocket updates
-- External API integrations (weather, time-based policies)
-- Advanced ML models (LSTM for time series)
-- Mobile API endpoints
-- Multi-admin support
-
-This project demonstrates modern network management with AI, making it more effective for educational and enterprise environments.</content>
-<parameter name="filePath">d:\project Cn\README.md"# Smart-network-monitoring-system" 
-"# Smart-network-monitoring-system" 
-"# Smart-network-monitoring-system" 
+You'll instantly see all devices connected to your network and their real-time data consumption!

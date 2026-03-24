@@ -33,7 +33,7 @@ async def index(request: Request):
     # We will provide a simple index.html fallback if it doesn't exist
     if not os.path.exists("templates/index.html"):
         return HTMLResponse("<h1>Dashboard UI not fully built yet.</h1>")
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="index.html")
 
 @app.get("/devices")
 def get_devices():
