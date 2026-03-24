@@ -229,10 +229,17 @@ async function toggleBlock(ip, currentStatus) {
 
 async function generateReport() {
     showToast("Generating usage report...");
-    const response = await fetch('/api/generate_report', { method: 'POST' });
-    const data = await response.json();
-    if (data.status === 'success') {
-        showToast(`Report generated: ${data.file.split('\\').pop()}`);
+    try {
+        const response = await fetch('/api/generate_report', { method: 'POST' });
+        const data = await response.json();
+        if (data.status === 'success' && data.download_url) {
+            showToast(`Report generated: ${data.filename || 'usage_report.pdf'}`);
+            window.open(data.download_url, '_blank');
+        } else {
+            showToast(data.message || 'Report generation failed');
+        }
+    } catch (error) {
+        showToast('Report generation failed');
     }
 }
 

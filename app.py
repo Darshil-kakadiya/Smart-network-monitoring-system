@@ -5,7 +5,7 @@ import threading
 import ipaddress
 import platform
 import subprocess
-from flask import Flask, render_template, jsonify, request, session, redirect, url_for
+from flask import Flask, render_template, jsonify, request, session, redirect, url_for, send_from_directory
 
 # Production Configuration
 from config import (
@@ -17,7 +17,7 @@ from traffic_control import tc_manager
 from logger import logger, log_action, log_error
 from scanner import scanner
 from ai_engine import ai_engine
-from reports import report_gen
+from reports import report_gen, REPORTS_DIR
 
 # --- PRODUCTION HARDENING (Phase 9) ---
 def check_environment():
@@ -436,10 +436,35 @@ def set_mode():
 def generate_report():
     if not is_authenticated():
         return jsonify({"status": "error", "message": "Unauthorized"}), 401
-    
-    report_path = report_gen.generate_csv_report(usage_history)
+
+    connected_by_ip = {device.get('ip'): device for device in users_db if device.get('ip')}
+    filtered_history = {
+        ip: usage_history.get(ip, [])
+        for ip in connected_by_ip.keys()
+        if ip in usage_history
+    }
+
+    report_path = report_gen.generate_pdf_report(filtered_history, devices=list(connected_by_ip.values()))
+    if not report_path:
+        return jsonify({"status": "error", "message": "Failed to generate report"}), 500
+
+    report_name = os.path.basename(report_path)
     log_action("REPORT", f"Generated: {report_path}")
-    return jsonify({"status": "success", "file": report_path})
+    return jsonify({
+        "status": "success",
+        "file": report_path,
+        "filename": report_name,
+        "download_url": f"/api/reports/{report_name}"
+    })
+
+
+@app.route('/api/reports/<path:filename>', methods=['GET'])
+def download_report(filename):
+    if not is_authenticated():
+        return jsonify({"status": "error", "message": "Unauthorized"}), 401
+
+    reports_dir = os.path.abspath(REPORTS_DIR)
+    return send_from_directory(reports_dir, filename, as_attachment=True)
 
 @app.route('/api/block', methods=['POST'])
 @app.route('/api/unblock', methods=['POST'])

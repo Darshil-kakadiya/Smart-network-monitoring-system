@@ -12,6 +12,7 @@ An innovative network traffic control system with AI-driven predictions, anomaly
 ### Advanced Network Management
 - **Intelligent Scanning**: Nmap integration for detailed device discovery (Linux)
 - **One-Click SMART Scan**: Hybrid scan (nmap/arp/ip-neigh/ping sweep) for better real-world discovery
+- **Hotspot-Only Device Filtering**: Shows only devices within the active hotspot/wireless subnet
 - **Wired/Wireless Labeling**: Detects likely connection type with confidence scoring
 - **Automated Blocking**: Auto-blocks devices with anomalous behavior in AUTO mode
 - **Priority-Based Bandwidth Allocation**: Role-based limits (Admin, Teacher, Student, Guest)
@@ -81,6 +82,12 @@ Edit `config.py` for:
 3. Monitor device usage and predictions
 4. Set priorities and block/unblock devices
 5. Generate reports
+
+## 📄 Reports
+
+- The dashboard REPORT button now generates a **PDF** report.
+- Reports include only currently connected hotspot devices with device names, summary, and usage samples.
+- Generated PDFs are downloadable directly from the UI.
 
 ## 🔒 Security Features
 

@@ -1,122 +1,8 @@
 [
     {
-        "ip": "192.168.1.10",
-        "mac": "AA:BB:CC:DD:EE:01",
-        "name": "Admin-PC",
-        "role": "Admin",
-        "bandwidth_limit": 100,
-        "status": "ACTIVE",
-        "scan_sources": [
-            "legacy"
-        ],
-        "device_type": "PC",
-        "connection_type": "Wired",
-        "detection_confidence": 85
-    },
-    {
-        "ip": "192.168.1.15",
-        "mac": "AA:BB:CC:DD:EE:02",
-        "name": "Teacher-Laptop",
-        "role": "Teacher",
-        "bandwidth_limit": 50,
-        "status": "ACTIVE",
-        "scan_sources": [
-            "legacy"
-        ],
-        "device_type": "Laptop",
-        "connection_type": "Unknown",
-        "detection_confidence": 85
-    },
-    {
-        "ip": "192.168.1.22",
-        "mac": "AA:BB:CC:DD:EE:03",
-        "name": "Student-Phone",
-        "role": "Student",
-        "bandwidth_limit": 10,
-        "status": "ACTIVE",
-        "scan_sources": [
-            "legacy"
-        ],
-        "device_type": "Mobile",
-        "connection_type": "Wireless",
-        "detection_confidence": 85
-    },
-    {
-        "ip": "192.168.1.50",
-        "mac": "AA:BB:CC:DD:EE:04",
-        "name": "Guest-Device",
-        "role": "Guest",
-        "bandwidth_limit": 5,
-        "status": "ACTIVE",
-        "scan_sources": [
-            "legacy"
-        ],
-        "device_type": "Unknown",
-        "connection_type": "Unknown",
-        "detection_confidence": 85
-    },
-    {
-        "ip": "10.255.84.83",
-        "mac": "9E:1D:9A:80:72:E3",
-        "name": "Unknown Device",
-        "role": "Guest",
-        "bandwidth_limit": 5,
-        "status": "BLOCKED",
-        "scan_sources": [
-            "arp",
-            "legacy",
-            "ping-sweep"
-        ],
-        "device_type": "Unknown",
-        "connection_type": "Unknown",
-        "detection_confidence": 85
-    },
-    {
-        "ip": "10.255.84.131",
-        "mac": "00:00:00:00:00:00",
-        "name": "DESKTOP-CFI6KAM (This PC)",
-        "role": "Guest",
-        "bandwidth_limit": 5,
-        "status": "ACTIVE",
-        "scan_sources": [
-            "ping-sweep"
-        ],
-        "device_type": "This PC",
-        "connection_type": "Wired",
-        "detection_confidence": 60
-    },
-    {
-        "ip": "10.255.84.2",
-        "mac": "00:00:00:00:00:00",
-        "name": "Unknown Device",
-        "role": "Guest",
-        "bandwidth_limit": 5,
-        "status": "BLOCKED",
-        "scan_sources": [
-            "ping-sweep"
-        ],
-        "device_type": "Unknown",
-        "connection_type": "Unknown",
-        "detection_confidence": 45
-    },
-    {
-        "ip": "10.255.84.1",
-        "mac": "00:00:00:00:00:00",
-        "name": "Unknown Device",
-        "role": "Guest",
-        "bandwidth_limit": 5,
-        "status": "BLOCKED",
-        "scan_sources": [
-            "ping-sweep"
-        ],
-        "device_type": "Unknown",
-        "connection_type": "Unknown",
-        "detection_confidence": 45
-    },
-    {
         "ip": "10.240.109.148",
         "mac": "F6:3D:10:74:7A:C8",
-        "name": "Unknown Device",
+        "name": "Device-148",
         "role": "Guest",
         "bandwidth_limit": 5,
         "status": "ACTIVE",
@@ -128,45 +14,18 @@
         "detection_confidence": 70
     },
     {
-        "ip": "192.168.56.1",
-        "mac": "00:00:00:00:00:00",
-        "name": "DESKTOP-CFI6KAM (This PC)",
-        "role": "Guest",
-        "bandwidth_limit": 5,
-        "status": "ACTIVE",
-        "scan_sources": [
-            "ping-sweep"
-        ],
-        "device_type": "This PC",
-        "connection_type": "Wired",
-        "detection_confidence": 60
-    },
-    {
-        "ip": "172.23.137.92",
-        "mac": "00:00:00:00:00:00",
-        "name": "pc",
-        "role": "Student",
-        "bandwidth_limit": 10,
-        "status": "INACTIVE",
-        "scan_sources": [
-            "legacy"
-        ],
-        "device_type": "PC",
-        "connection_type": "Wired",
-        "detection_confidence": 50
-    },
-    {
         "ip": "10.240.109.13",
-        "mac": "00:00:00:00:00:00",
-        "name": "Unknown Device",
+        "mac": "0A:B0:CF:E0:35:6F",
+        "name": "Device-13",
         "role": "Guest",
         "bandwidth_limit": 5,
         "status": "ACTIVE",
         "scan_sources": [
+            "arp",
             "ping-sweep"
         ],
         "device_type": "Unknown",
         "connection_type": "Unknown",
-        "detection_confidence": 45
+        "detection_confidence": 70
     }
 ]

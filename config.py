@@ -26,6 +26,24 @@ SMART_SCAN_MAX_SUBNETS = 4
 SMART_SCAN_PING_SWEEP = True
 SMART_SCAN_INCLUDE_HOSTNAME_RESOLVE = True
 
+# Hotspot Filtering
+HOTSPOT_ONLY_MODE = True
+HOTSPOT_INTERFACE_KEYWORDS = [
+	"wireless",
+	"wi-fi",
+	"wifi",
+	"wlan",
+	"hotspot",
+	"mobile"
+]
+
+# Optional explicit hotspot subnet hints (used as fallback)
+HOTSPOT_SUBNET_HINTS = [
+	"192.168.43.0/24",   # common Android hotspot range
+	"172.20.10.0/28",    # common iPhone hotspot range
+	"192.168.137.0/24"   # common Windows mobile hotspot range
+]
+
 # AI Prediction
 AI_WINDOW_SIZE = 10
 

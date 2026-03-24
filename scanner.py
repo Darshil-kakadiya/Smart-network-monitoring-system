@@ -16,6 +16,9 @@ from config import (
     SMART_SCAN_MAX_SUBNETS,
     SMART_SCAN_PING_SWEEP,
     SMART_SCAN_INCLUDE_HOSTNAME_RESOLVE,
+    HOTSPOT_ONLY_MODE,
+    HOTSPOT_INTERFACE_KEYWORDS,
+    HOTSPOT_SUBNET_HINTS,
 )
 
 class NetworkScanner:
@@ -24,6 +27,7 @@ class NetworkScanner:
         self.local_hostname = socket.gethostname()
         self.local_ips = self._get_local_ips()
         self.local_ipv4_networks = self._get_local_ipv4_networks()
+        self.hotspot_ipv4_networks = self._get_hotspot_ipv4_networks()
         self.last_scan_details = {
             "mode": "startup",
             "scanned_subnets": [],
@@ -127,6 +131,95 @@ class NetworkScanner:
 
         return unique_networks
 
+    def _get_hotspot_ipv4_networks(self):
+        selected = []
+
+        if IS_LINUX:
+            selected.extend(self.local_ipv4_networks)
+        else:
+            try:
+                output = subprocess.check_output(["ipconfig"], timeout=8).decode("utf-8", errors="ignore")
+                current_adapter = ""
+                current_ipv4 = None
+                current_mask = None
+                for raw_line in output.splitlines():
+                    adapter_match = re.match(r"^([^\r\n]+adapter\s+[^:]+):\s*$", raw_line, re.IGNORECASE)
+                    if adapter_match:
+                        current_adapter = adapter_match.group(1).strip().lower()
+                        current_ipv4 = None
+                        current_mask = None
+                        continue
+
+                    line = raw_line.strip()
+                    ipv4_match = re.search(r"IPv4 Address[^:]*:\s*(\d+\.\d+\.\d+\.\d+)", line, re.IGNORECASE)
+                    if ipv4_match:
+                        current_ipv4 = ipv4_match.group(1)
+                        continue
+
+                    mask_match = re.search(r"Subnet Mask[^:]*:\s*(\d+\.\d+\.\d+\.\d+)", line, re.IGNORECASE)
+                    if mask_match:
+                        current_mask = mask_match.group(1)
+
+                    if current_ipv4 and current_mask:
+                        try:
+                            iface = ipaddress.IPv4Interface(f"{current_ipv4}/{current_mask}")
+                            is_hotspot_like = any(token in current_adapter for token in HOTSPOT_INTERFACE_KEYWORDS)
+                            if not iface.ip.is_loopback and is_hotspot_like:
+                                selected.append(iface.network)
+                        except Exception:
+                            pass
+                        current_ipv4 = None
+                        current_mask = None
+            except Exception as exc:
+                logger.warning(f"Hotspot subnet detection failed: {exc}")
+
+        if not selected:
+            selected.extend(self.local_ipv4_networks)
+
+        if not selected and HOTSPOT_SUBNET_HINTS:
+            for hint in HOTSPOT_SUBNET_HINTS:
+                try:
+                    selected.append(ipaddress.ip_network(hint, strict=False))
+                except Exception:
+                    continue
+
+        unique_networks = []
+        seen = set()
+        for network in selected:
+            value = str(network)
+            if value in seen:
+                continue
+            seen.add(value)
+            unique_networks.append(network)
+        return unique_networks
+
+    def _is_in_hotspot_network(self, ip):
+        try:
+            ip_obj = ipaddress.ip_address(ip)
+        except Exception:
+            return False
+
+        if not HOTSPOT_ONLY_MODE:
+            return True
+
+        candidate_networks = self.hotspot_ipv4_networks or self.local_ipv4_networks
+        if not candidate_networks:
+            try:
+                candidate_networks = [ipaddress.ip_network(SCAN_SUBNET, strict=False)]
+            except Exception:
+                candidate_networks = []
+
+        if not candidate_networks:
+            return True
+
+        return any(ip_obj in network for network in candidate_networks)
+
+    def _friendly_name_for_ip(self, ip):
+        if not ip:
+            return "Unknown Device"
+        suffix = ip.split('.')[-1] if '.' in ip else ip
+        return f"Device-{suffix}"
+
     def _is_usable_host_ip(self, ip):
         try:
             ip_obj = ipaddress.ip_address(ip)
@@ -185,8 +278,13 @@ class NetworkScanner:
 
             if not ip or not self._is_usable_host_ip(ip):
                 continue
+            if not self._is_in_hotspot_network(ip):
+                continue
             if not self._is_usable_host_mac(mac):
                 normalized["mac"] = "00:00:00:00:00:00"
+
+            if not normalized.get("name") or normalized.get("name") == "Unknown Device":
+                normalized["name"] = self._friendly_name_for_ip(ip)
 
             if normalized.get("detection_confidence") is None:
                 normalized["detection_confidence"] = self._calculate_confidence(normalized)
@@ -294,6 +392,13 @@ class NetworkScanner:
         except Exception:
             configured = None
 
+        if HOTSPOT_ONLY_MODE:
+            hotspot_subnets = [str(network) for network in (self.hotspot_ipv4_networks or [])]
+            if hotspot_subnets:
+                return hotspot_subnets[:max(1, SMART_SCAN_MAX_SUBNETS)]
+            if configured:
+                return [str(configured)]
+
         selected = []
         if configured and self.local_ipv4_networks and any(network.overlaps(configured) for network in self.local_ipv4_networks):
             selected.append(str(configured))
@@ -388,6 +493,8 @@ class NetworkScanner:
             ip = ip_match.group(1)
             if not self._is_usable_host_ip(ip):
                 continue
+            if not self._is_in_hotspot_network(ip):
+                continue
 
             mac = self._normalize_mac(mac_match.group(1)) if mac_match else "00:00:00:00:00:00"
             if mac != "00:00:00:00:00:00" and not self._is_usable_host_mac(mac):
@@ -439,6 +546,8 @@ class NetworkScanner:
             normalized = self._normalize_device(discovered_device)
             ip = normalized['ip']
             if not ip:
+                continue
+            if not self._is_in_hotspot_network(ip):
                 continue
 
             if ip in existing_by_ip:
@@ -535,6 +644,8 @@ class NetworkScanner:
                 mac = macs[0].replace('-', ':').upper()
                 if not self._is_usable_host_ip(ip):
                     continue
+                if not self._is_in_hotspot_network(ip):
+                    continue
                 if not self._is_usable_host_mac(mac):
                     continue
                 devices.append({
@@ -617,6 +728,9 @@ class NetworkScanner:
         except ValueError:
             return {"status": "error", "message": "Invalid IP format"}
 
+        if not self._is_in_hotspot_network(ip):
+            return {"status": "error", "message": "IP is outside hotspot subnet"}
+
         is_reachable = self._ping_ip(ip)
         existing = next((device for device in self.devices if device.get("ip") == ip), None)
 
@@ -655,6 +769,9 @@ class NetworkScanner:
             ipaddress.ip_address(ip)
         except ValueError:
             return {"status": "error", "message": "Invalid IP format"}
+
+        if not self._is_in_hotspot_network(ip):
+            return {"status": "error", "message": "IP is outside hotspot subnet"}
 
         if not self._is_usable_host_ip(ip):
             return {"status": "error", "message": "Unusable IP (broadcast/multicast/reserved)"}
@@ -714,15 +831,6 @@ class NetworkScanner:
         scan_subnets = self._get_effective_scan_subnets()
         use_smart = str(scan_mode).lower() == "smart"
         discovered = self.scan_network_smart() if use_smart else (self.scan_network_nmap() if IS_LINUX else self.scan_network_arp())
-        
-        # Simulation for Demo (if no devices found)
-        if not discovered and not IS_LINUX:
-            discovered = [
-                {"ip": "192.168.1.10", "mac": "AA:BB:CC:DD:EE:01", "name": "Admin-PC", "role": "Admin", "bandwidth_limit": 100, "device_type": "PC", "status": "ACTIVE", "scan_sources": ["simulation"]},
-                {"ip": "192.168.1.15", "mac": "AA:BB:CC:DD:EE:02", "name": "Teacher-Laptop", "role": "Teacher", "bandwidth_limit": 50, "device_type": "Laptop", "status": "ACTIVE", "scan_sources": ["simulation"]},
-                {"ip": "192.168.1.22", "mac": "AA:BB:CC:DD:EE:03", "name": "Student-Phone", "role": "Student", "bandwidth_limit": 10, "device_type": "Mobile", "status": "ACTIVE", "scan_sources": ["simulation"]},
-                {"ip": "192.168.1.50", "mac": "AA:BB:CC:DD:EE:04", "name": "Guest-Device", "role": "Guest", "bandwidth_limit": 5, "device_type": "Unknown", "status": "ACTIVE", "scan_sources": ["simulation"]},
-            ]
 
         self._merge_discovered(discovered)
         self.devices = self._sanitize_devices(self.devices)
