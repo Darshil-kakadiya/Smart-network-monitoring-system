@@ -9,7 +9,7 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 
 # Production Configuration
 from config import (
-    NETWORK_INTERFACE, SCAN_SUBNET, SYSTEM_MODE, LOG_FILE, 
+    SCAN_SUBNET, SYSTEM_MODE, LOG_FILE, 
     ADMIN_USER, ADMIN_PASS, SECRET_KEY, REFRESH_INTERVAL, 
     IS_LINUX, REQUIRED_TOOLS, HISTORY_LIMIT, AUTO_SCAN_INTERVAL
 )

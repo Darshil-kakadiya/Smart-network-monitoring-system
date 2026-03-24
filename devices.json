@@ -61,7 +61,7 @@
         "name": "Unknown Device",
         "role": "Guest",
         "bandwidth_limit": 5,
-        "status": "ACTIVE",
+        "status": "BLOCKED",
         "scan_sources": [
             "arp",
             "legacy",
@@ -91,7 +91,7 @@
         "name": "Unknown Device",
         "role": "Guest",
         "bandwidth_limit": 5,
-        "status": "ACTIVE",
+        "status": "BLOCKED",
         "scan_sources": [
             "ping-sweep"
         ],
@@ -101,6 +101,62 @@
     },
     {
         "ip": "10.255.84.1",
+        "mac": "00:00:00:00:00:00",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5,
+        "status": "BLOCKED",
+        "scan_sources": [
+            "ping-sweep"
+        ],
+        "device_type": "Unknown",
+        "connection_type": "Unknown",
+        "detection_confidence": 45
+    },
+    {
+        "ip": "10.240.109.148",
+        "mac": "F6:3D:10:74:7A:C8",
+        "name": "Unknown Device",
+        "role": "Guest",
+        "bandwidth_limit": 5,
+        "status": "ACTIVE",
+        "scan_sources": [
+            "arp"
+        ],
+        "device_type": "Unknown",
+        "connection_type": "Unknown",
+        "detection_confidence": 70
+    },
+    {
+        "ip": "192.168.56.1",
+        "mac": "00:00:00:00:00:00",
+        "name": "DESKTOP-CFI6KAM (This PC)",
+        "role": "Guest",
+        "bandwidth_limit": 5,
+        "status": "ACTIVE",
+        "scan_sources": [
+            "ping-sweep"
+        ],
+        "device_type": "This PC",
+        "connection_type": "Wired",
+        "detection_confidence": 60
+    },
+    {
+        "ip": "172.23.137.92",
+        "mac": "00:00:00:00:00:00",
+        "name": "pc",
+        "role": "Student",
+        "bandwidth_limit": 10,
+        "status": "INACTIVE",
+        "scan_sources": [
+            "legacy"
+        ],
+        "device_type": "PC",
+        "connection_type": "Wired",
+        "detection_confidence": 50
+    },
+    {
+        "ip": "10.240.109.13",
         "mac": "00:00:00:00:00:00",
         "name": "Unknown Device",
         "role": "Guest",

@@ -2,7 +2,6 @@ import os
 import platform
 
 # Network Configuration
-NETWORK_INTERFACE = "enp0s3"
 SCAN_SUBNET = "192.168.1.0/24"
 
 # System Settings
